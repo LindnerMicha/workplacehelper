@@ -1,5 +1,6 @@
 import pygame
 import sys
+from urllib import request
 
 pygame.init()
 w, h = 1200, 900
@@ -54,19 +55,19 @@ mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", "37", " ", 
                 ["135-6HD00-0BA1", "69249", "A5E31290169", "37", "4", "37", "37", 0]]
 
 materials = [["Frontdeckel Dunkelblau", "65325", "A5E36039007", "3196 St.", "2970 St."],
-            ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St."],
-            ["Frontdeckel Schwarz", "65189", "A5E36039004", "3196 St.", "2970 St."],
-            ["Frontdeckel Weiß", "65257", "A5E36039003", "3196 St.", "2970 St."],
-            ["Gehäuse 15mm", "63167", "A5E03387374", "925 St.", "3700 St."],
-            ["Codierung A (Schwarz)", "75504", "A5E03392060", "1500 St.", "8000 St."],
-            ["Codierung B (Weiß)", "75505", "A5E03392061", "1500 St.", "8000 St."],
-            ["Schachtel 15mm", "63448", "A5E03749927", "720 St.", "2880 St."],
-            ["Schachtel 10-fach", "64176", "A5E34858449", "360 St.", "170 St."],
-            ["Etiketten 60x70", "AAB", "EWA-000000429125", "2000 St.", " "],
-            ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
-            ["Papiertücher (Blau)", "AAB", "EWA-000000429203", "200 St.", " "],
-            ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
-            ["1.6mm Fräser", "AAB", "A5E49854071", "1 St.", " "]]
+             ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St."],
+             ["Frontdeckel Schwarz", "65189", "A5E36039004", "3196 St.", "2970 St."],
+             ["Frontdeckel Weiß", "65257", "A5E36039003", "3196 St.", "2970 St."],
+             ["Gehäuse 15mm", "63167", "A5E03387374", "925 St.", "3700 St."],
+             ["Codierung A (Schwarz)", "75504", "A5E03392060", "1500 St.", "8000 St."],
+             ["Codierung B (Weiß)", "75505", "A5E03392061", "1500 St.", "8000 St."],
+             ["Schachtel 15mm", "63448", "A5E03749927", "720 St.", "2880 St."],
+             ["Schachtel 10-fach", "64176", "A5E34858449", "360 St.", "170 St."],
+             ["Etiketten 60x70", "AAB", "EWA-000000429125", "2000 St.", " "],
+             ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
+             ["Papiertücher (Blau)", "AAB", "EWA-000000429203", "200 St.", " "],
+             ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
+             ["1.6mm Fräser", "AAB", "A5E49854071", "1 St.", " "]]
 
 #region -> Barcodes
 front_black_img = pygame.image.load("barcodes/front-schwarz.gif").convert_alpha()
@@ -91,6 +92,66 @@ sys_font22 = pygame.font.SysFont(None, 22)
 sys_font30 = pygame.font.SysFont(None, 30)
 sys_font60 = pygame.font.SysFont(None, 60)
 #endregion
+
+class Checkbox:
+    def __init__(self, surface, x, y, idnum, color=(230, 230, 230),
+                 caption="", outline_color=(0, 0, 0), check_color=(0, 0, 0),
+                 font_size=22, font_color=(0, 0, 0),
+                 text_offset=(28, 1), font='Ariel Black'):
+        self.surface = surface
+        self.x = x
+        self.y = y
+        self.color = color
+        self.caption = caption
+        self.oc = outline_color
+        self.cc = check_color
+        self.fs = font_size
+        self.fc = font_color
+        self.to = text_offset
+        self.ft = font
+
+        #identification for removal and reorginazation
+        self.idnum = idnum
+
+        # checkbox object
+        self.checkbox_obj = pygame.Rect(self.x, self.y, 12, 12)
+        self.checkbox_outline = self.checkbox_obj.copy()
+
+        # variables to test the different states of the checkbox
+        self.checked = False
+
+    def _draw_button_text(self):
+        self.font = pygame.font.SysFont(self.ft, self.fs)
+        self.font_surf = self.font.render(self.caption, True, self.fc)
+        w, h = self.font.size(self.caption)
+        self.font_pos = (self.x + self.to[0], self.y + 12 / 2 - h / 2 +
+                         self.to[1])
+        self.surface.blit(self.font_surf, self.font_pos)
+
+    def render_checkbox(self):
+        if self.checked:
+            pygame.draw.rect(self.surface, self.color, self.checkbox_obj)
+            pygame.draw.rect(self.surface, self.oc, self.checkbox_outline, 1)
+            pygame.draw.circle(self.surface, self.cc, (self.x + 6, self.y + 6), 4)
+
+        elif not self.checked:
+            pygame.draw.rect(self.surface, self.color, self.checkbox_obj)
+            pygame.draw.rect(self.surface, self.oc, self.checkbox_outline, 1)
+        self._draw_button_text()
+
+    def _update(self, event_object):
+        x, y = pygame.mouse.get_pos()
+        px, py, w, h = self.checkbox_obj
+        if px < x < px + w and py < y < py + w:
+            if self.checked:
+                self.checked = False
+            else:
+                self.checked = True
+
+    def update_checkbox(self, event_object):
+        if event_object.type == pygame.MOUSEBUTTONDOWN:
+            self.click = True
+            self._update(event_object)
 #region -> Button
 def textObjekt(text, pixel_font15):
     textFlaeche = pixel_font15.render(text, True, (0, 0, 0))
@@ -138,7 +199,7 @@ def topbar():
     button("Exit", 1030, 8, 150, 45, (186, 48, 48), (133, 1, 1), sys_font30)
 
 def baugruppen():
-#region -> Buttons
+    #region -> Buttons
     button(mlfb_digital[0][0], 0, 60, 300, 30, (155,150,100), (0,100,255), sys_font22)
     button(mlfb_digital[1][0], 0, 90, 300, 30, (155,150,100), (0,100,255), sys_font22)
     button(mlfb_digital[2][0], 0, 120, 300, 30, (155,150,100), (0,100,255), sys_font22)
@@ -181,8 +242,8 @@ def baugruppen():
     pygame.draw.rect(screen, (168, 165, 165), (1050,300,85, 85))
     draw_text("Vorwärme", sys_font30, (0,0,0), screen, 310 , 435)
     pygame.draw.rect(screen, (168, 165, 165), (460,400,85, 85))
-#endregion
-#region -> Wärmeindec
+    #endregion
+    #region -> Wärmeindec
     if option == mlfb_digital[0][0] and mlfb_digital[0][7]:
         pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
     elif option == mlfb_digital[0][0]:
@@ -284,8 +345,8 @@ def baugruppen():
         pygame.draw.rect(screen, (9, 255, 0), (460,400,85, 85))
     elif option == mlfb_analog[12][0]:
         pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
-#endregion
-#region -> UI Zeichnen
+    #endregion
+    #region -> UI Zeichnen
     if option == mlfb_digital[0][0]:
         draw_text(mlfb_digital[0][3], sys_font30, (0,0,0), screen, 490 , 230)
         draw_text(mlfb_digital[0][4], sys_font30, (0,0,0), screen, 690 , 230)
@@ -825,6 +886,22 @@ def marker():
 
 #endregion
 
+font = pygame.font.Font(None, 32)
+input_box = pygame.Rect(400, 100, 140, 32)
+color_inactive = pygame.Color('lightskyblue3')
+color_active = pygame.Color('dodgerblue2')
+color = color_inactive
+active = False
+text = ''
+done = False
+suche_em = False
+suche_string = " "
+a5e_erg = ""
+
+html_index_min = 0
+html_index_max = 0
+
+
 while runtime:
 
     screen.fill((255, 255, 255))
@@ -836,18 +913,103 @@ while runtime:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             runtime = False
+        elif event.type == pygame.MOUSEBUTTONDOWN and sites == "Suchen":
+            # If the user clicked on the input_box rect.
+            if input_box.collidepoint(event.pos):
+                # Toggle the active variable.
+                active = not active
+            else:
+                active = False
+            # Change the current color of the input box.
+            color = color_active if active else color_inactive
+        elif event.type == pygame.KEYDOWN and sites == "Suchen":
+            if active:
+                #if event.key == pygame.K_RETURN:
+                #text = ''
+                #elif event.key == pygame.K_BACKSPACE:
+                #text = text[:-1]
+                #else:
+                text += event.unicode
+
+            screen.fill((30, 30, 30))
+            # Render the current text.
+            txt_surface = font.render(text, True, color)
+            # Resize the box if the text is too long.
+            width = max(200, txt_surface.get_width()+10)
+            input_box.w = width
+            # Blit the text.
+            screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+            # Blit the input_box rect.
+            pygame.draw.rect(screen, color, input_box, 2)
+
     if pressed[pygame.K_SPACE]:
-            runtime = False
+        runtime = False
     if sites == "Exit":
         runtime = False
-
 
     if sites == "Baugruppen":
         baugruppen()
     elif sites == "Material":
         material()
     elif sites == "Suchen":
-        pass
+
+        screen.fill((255, 255, 255))
+
+        button("Suche", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Neue Suche", 0, 130, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Im System Suchen", 0, 160, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        draw_text("Die A5E Nummer lautet: ", sys_font30, (0,0,0), screen, 400 , 165)
+        draw_text(a5e_erg, sys_font30, (0,0,0), screen, 700 , 165)
+
+        #region -> Webscraper
+
+        # Render the current text.
+        txt_surface = font.render(text, True, color)
+        # Resize the box if the text is too long.
+        width = max(200, txt_surface.get_width()+10)
+        input_box.w = width
+        # Blit the text.
+        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+        # Blit the input_box rect.
+        pygame.draw.rect(screen, color, input_box, 2)
+
+        if option == "Neue Suche":
+            text = ""
+            option = " "
+
+        if option == "Suche" and suche_em:
+
+            try:
+                suche_string = text
+                print("Werteübergabe erfolgreich")
+
+                url_requested = request.urlopen(f'https://simaticit.amb2.siemens.de/snr/Default.aspx?SN={suche_string}')
+                if 200 == url_requested.code:
+                    html_content = str(url_requested.read())
+
+                material_index = html_content.index("Materialnummer der gescannten Seriennummer")
+
+                html_index_min = material_index
+                html_index_max = material_index + 250
+
+                html_index = html_content.index('A5E', html_index_min, html_index_max)
+
+                a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
+
+                print(a5e_erg)
+            except:
+                print("Error Webscraper")
+        #endregion
+
+        if suche_string == text:
+            suche_em = False
+        else:
+            suche_em = True
+
+
+
+
+
 
     topbar()
 

@@ -1,6 +1,7 @@
 import pygame
 import sys
 from urllib import request
+import tkinter as tk
 
 pygame.init()
 w, h = 1200, 900
@@ -24,6 +25,7 @@ fps = 60
 
 option = " "
 sites = "Material"
+scan_switch = "Leiterplatte"
 
 mlfb_digital = [["131-6BF00-0CA0", "73643", "A5E45983869", " ", " ", " ", " ", 0],
                 ["131-6BF00-0DA0", "73643", "A5E45983869", " ", " ", " ", " ", 0],
@@ -92,6 +94,8 @@ sys_font22 = pygame.font.SysFont(None, 22)
 sys_font30 = pygame.font.SysFont(None, 30)
 sys_font60 = pygame.font.SysFont(None, 60)
 #endregion
+
+
 #region -> Button
 def textObjekt(text, pixel_font15):
     textFlaeche = pixel_font15.render(text, True, (0, 0, 0))
@@ -101,6 +105,7 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
     global maus_aktiv
     global option
     global sites
+    global scan_switch
 
     if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
         pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
@@ -115,6 +120,10 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
                 sites = "Exit"
             elif but_txt == "Suchen":
                 sites = "Suchen"
+            elif but_txt == "Leiterplatte":
+                scan_switch = "Leiterplatte"
+            elif but_txt == "Baugruppe":
+                scan_switch = "Baugruppe"
         if maus_klick[0] == 0:
             maus_aktiv = False
     else:
@@ -836,9 +845,16 @@ text = ''
 done = False
 suche_em = False
 suche_string = " "
+a5e_erg = ""
 
 html_index_min = 0
 html_index_max = 0
+
+set_error = False
+erg_gefunden = False
+
+
+
 
 
 while runtime:
@@ -848,6 +864,7 @@ while runtime:
     maus_pos = pygame.mouse.get_pos()
     maus_klick = pygame.mouse.get_pressed()
     pressed = pygame.key.get_pressed()
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -863,23 +880,17 @@ while runtime:
             color = color_active if active else color_inactive
         elif event.type == pygame.KEYDOWN and sites == "Suchen":
             if active:
-                #if event.key == pygame.K_RETURN:
-                    #text = ''
-                #elif event.key == pygame.K_BACKSPACE:
-                    #text = text[:-1]
-                #else:
-                text += event.unicode
+                if event.key == pygame.K_BACKSPACE:
+                    text = text[:-1]
+                else:
+                    text += event.unicode
 
-            screen.fill((30, 30, 30))
-            # Render the current text.
             txt_surface = font.render(text, True, color)
-            # Resize the box if the text is too long.
             width = max(200, txt_surface.get_width()+10)
             input_box.w = width
-            # Blit the text.
             screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-            # Blit the input_box rect.
             pygame.draw.rect(screen, color, input_box, 2)
+
 
     if pressed[pygame.K_SPACE]:
         runtime = False
@@ -894,9 +905,26 @@ while runtime:
 
         screen.fill((255, 255, 255))
 
+
+
         button("Suche", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
         button("Neue Suche", 0, 130, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Im System suchen", 400, 200, 235, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Leiterplatte", 900, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Baugruppe", 900, 130, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        if scan_switch == "Leiterplatte":
+            pygame.draw.ellipse(screen, (255,0,0), [880,110,15,15])
+        if scan_switch == "Baugruppe":
+            pygame.draw.ellipse(screen, (255,0,0), [880,140,15,15])
+        draw_text("Die A5E Nummer lautet: ", sys_font30, (0,0,0), screen, 400 , 165)
+        draw_text(a5e_erg, sys_font30, (0,0,0), screen, 700 , 165)
 
+
+        if set_error == True:
+            draw_text("Error Webscraper / Ungültiger Barcode", sys_font30, (0,0,0), screen, 700 , 165)
+
+
+#region -> Webscraper
 
         # Render the current text.
         txt_surface = font.render(text, True, color)
@@ -911,34 +939,165 @@ while runtime:
         if option == "Neue Suche":
             text = ""
             option = " "
+            set_error = False
+            material_index = 0
+            a5e_erg = ""
+            suche_string = ""
 
         if option == "Suche" and suche_em:
-            #region -> Webscraper
-            suche_string = text
-            print("Werteübergabe erfolgreich")
 
-            url_requested = request.urlopen(f'https://simaticit.amb2.siemens.de/snr/Default.aspx?SN={suche_string}')
-            if 200 == url_requested.code:
-                html_content = str(url_requested.read())
+            try:
+                suche_string = text
+                print("Werteübergabe erfolgreich")
 
-            material_index = html_content.index("Materialnummer der gescannten Seriennummer")
+                url_requested = request.urlopen(f'https://simaticit.amb2.siemens.de/snr/Default.aspx?SN={suche_string}')
+                if 200 == url_requested.code:
+                    html_content = str(url_requested.read())
 
-            html_index_min = material_index
-            html_index_max = material_index + 250
 
-            html_index = html_content.index('A5E', html_index_min, html_index_max)
+                if scan_switch == "Leiterplatte":
+                    material_index = html_content.index("Materialnummer der gescannten Seriennummer")
 
-            a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
+                    html_index_min = material_index
+                    html_index_max = material_index + 250
 
-            print(a5e_erg)
-            #endregion
+                    html_index = html_content.index('A5E', html_index_min, html_index_max)
+
+                    a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
+                    print(f"Leiterplatten setting -> {a5e_erg}")
+
+                elif scan_switch == "Baugruppe":
+                    material_index = html_content.index("HeaderTableBlueWhiteHyperlink")
+
+                    html_index_min = material_index
+                    html_index_max = material_index + 250
+
+                    html_index = html_content.index('A5E', html_index_min, html_index_max)
+
+                    a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
+                    print(f"Baugruppen setting -> {a5e_erg}")
+
+
+                set_error = False
+
+
+            except:
+                set_error = True
+
+
+#endregion
 
         if suche_string == text:
             suche_em = False
         else:
             suche_em = True
 
+        if option == "Im System suchen":
 
+            if a5e_erg == mlfb_digital[0][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[0][0]
+            if a5e_erg == mlfb_digital[1][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[1][0]
+            if a5e_erg == mlfb_digital[2][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[2][0]
+            if a5e_erg == mlfb_digital[3][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[3][0]
+            if a5e_erg == mlfb_digital[4][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[4][0]
+            if a5e_erg == mlfb_digital[5][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[5][0]
+            if a5e_erg == mlfb_digital[6][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[6][0]
+            if a5e_erg == mlfb_digital[7][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[7][0]
+            if a5e_erg == mlfb_digital[8][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[8][0]
+            if a5e_erg == mlfb_digital[9][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[9][0]
+            if a5e_erg == mlfb_digital[10][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[10][0]
+            if a5e_erg == mlfb_digital[11][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_digital[11][0]
+
+
+
+
+            if a5e_erg == mlfb_analog[0][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[0][0]
+            if a5e_erg == mlfb_analog[1][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[1][0]
+            if a5e_erg == mlfb_analog[2][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[2][0]
+            if a5e_erg == mlfb_analog[3][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[3][0]
+            if a5e_erg == mlfb_analog[4][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[4][0]
+            if a5e_erg == mlfb_analog[5][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[5][0]
+            if a5e_erg == mlfb_analog[6][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[6][0]
+            if a5e_erg == mlfb_analog[7][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[7][0]
+            if a5e_erg == mlfb_analog[8][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[8][0]
+            if a5e_erg == mlfb_analog[9][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[9][0]
+            if a5e_erg == mlfb_analog[10][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[10][0]
+            if a5e_erg == mlfb_analog[11][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[11][0]
+            if a5e_erg == mlfb_analog[12][2]:
+                erg_gefunden = True
+                sites = "Baugruppen"
+                option = mlfb_analog[12][0]
 
 
 
@@ -946,6 +1105,6 @@ while runtime:
     topbar()
 
 
-
     pygame.display.flip()
     clock.tick(fps)
+
