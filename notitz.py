@@ -59,3 +59,17 @@ button(mlfb_analog[9][0], 0, 780, 300, 30, (155,150,100), (0,100,255), sys_font2
 button(mlfb_analog[10][0], 0, 810, 300, 30, (155,150,100), (0,100,255), sys_font22)
 button(mlfb_analog[11][0], 0, 840, 300, 30, (155,150,100), (0,100,255), sys_font22)
 button(mlfb_analog[12][0], 0, 870, 300, 30, (155,150,100), (0,100,255), sys_font22)
+
+
+if option == "Backgroundcolor":
+    button("+", 400, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+    draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
+    draw_text(f"{background_r}", sys_font30, (0,0,0), screen, 650 , 100)
+    button("set 0", 770, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
+    draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
+    draw_text(f"{background_g}", sys_font30, (0,0,0), screen, 650 , 150)
+    button("set 0", 770, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
+    draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
+    draw_text(f"{background_b}", sys_font30, (0,0,0), screen, 650 , 200)
+    button("set 0", 770, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
+    button("-", 900, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)

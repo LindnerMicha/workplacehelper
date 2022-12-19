@@ -106,12 +106,18 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
     global option
     global sites
     global scan_switch
+    global background_r
+    global background_g
+    global background_b
 
     if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
         pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
         if maus_klick[0] == 1 and maus_aktiv == False:
             maus_aktiv = True
-            option = but_txt
+            if but_txt != "-"
+            if but_txt != "+":
+                option = but_txt
+
             if but_txt == "Baugruppen":
                 sites = "Baugruppen"
             elif but_txt == "Material":
@@ -120,10 +126,25 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
                 sites = "Exit"
             elif but_txt == "Suchen":
                 sites = "Suchen"
+            elif but_txt == "Settings":
+                sites = "Settings"
             elif but_txt == "Leiterplatte":
                 scan_switch = "Leiterplatte"
             elif but_txt == "Baugruppe":
                 scan_switch = "Baugruppe"
+            if but_txt == "+" and but_x == 100:
+                background_r += 1
+            if but_txt == "-"and but_x == 100:
+                background_r -= 1
+            if but_txt == "+" and but_x == 150:
+                background_g += 1
+            if but_txt == "-"and but_x == 150:
+                background_g -= 1
+            if but_txt == "+" and but_x == 200:
+                background_b += 1
+            if but_txt == "-"and but_x == 200:
+                background_b -= 1
+
         if maus_klick[0] == 0:
             maus_aktiv = False
     else:
@@ -145,6 +166,7 @@ def topbar():
     button("Baugruppen", 10, 8, 150, 45, (155,150,100), (0,100,255), sys_font30)
     button("Material", 200, 8, 150, 45, (155,150,100), (0,100,255), sys_font30)
     button("Suchen", 400, 8, 150, 45, (155, 150,100), (0, 100, 255), sys_font30)
+    button("Settings", 800, 8, 150, 45, (155, 150,100), (0, 100, 255), sys_font30)
     button("Exit", 1030, 8, 150, 45, (186, 48, 48), (133, 1, 1), sys_font30)
 
 def baugruppen():
@@ -832,7 +854,6 @@ def marker():
     if option == mlfb_analog[12][0]:
         pygame.draw.ellipse(screen, (255,0,0), [300,875,15,15])
 
-
 #endregion
 
 font = pygame.font.Font(None, 32)
@@ -854,12 +875,15 @@ set_error = False
 erg_gefunden = False
 
 
-
+background_r = 255
+background_g = 255
+background_b = 255
+plus_minus = " "
 
 
 while runtime:
 
-    screen.fill((255, 255, 255))
+    screen.fill((background_r, background_g, background_b))
 
     maus_pos = pygame.mouse.get_pos()
     maus_klick = pygame.mouse.get_pressed()
@@ -921,10 +945,11 @@ while runtime:
 
 
         if set_error == True:
-            draw_text("Error Webscraper / Ungültiger Barcode", sys_font30, (0,0,0), screen, 700 , 165)
+            a5e_erg = "Error Webscraper / Ungültiger Barcode"
+            #draw_text("Error Webscraper / Ungültiger Barcode", sys_font30, (0,0,0), screen, 700 , 165)
 
 
-#region -> Webscraper
+        #region -> Webscraper
 
         # Render the current text.
         txt_surface = font.render(text, True, color)
@@ -985,7 +1010,8 @@ while runtime:
                 set_error = True
 
 
-#endregion
+        #endregion
+
 
         if suche_string == text:
             suche_em = False
@@ -998,50 +1024,74 @@ while runtime:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[0][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[1][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[1][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[2][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[2][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[3][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[3][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[4][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[4][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[5][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[5][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[6][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[6][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[7][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[7][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[8][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[8][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[9][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[9][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[10][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[10][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_digital[11][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_digital[11][0]
+            else:
+                set_error = True
 
 
 
@@ -1050,60 +1100,114 @@ while runtime:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[0][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[1][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[1][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[2][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[2][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[3][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[3][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[4][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[4][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[5][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[5][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[6][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[6][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[7][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[7][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[8][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[8][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[9][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[9][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[10][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[10][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[11][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[11][0]
+            else:
+                set_error = True
             if a5e_erg == mlfb_analog[12][2]:
                 erg_gefunden = True
                 sites = "Baugruppen"
                 option = mlfb_analog[12][0]
+            else:
+                set_error = True
+    elif sites == "Settings":
+        screen.fill((background_r, background_g, background_b))
+        button("Backgroundcolor", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        if option == "Backgroundcolor":
+            button("+", 400, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
+            draw_text(f"{background_r}", sys_font30, (0,0,0), screen, 650 , 100)
+            button("set 0", 770, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
+            draw_text(f"{background_g}", sys_font30, (0,0,0), screen, 650 , 150)
+            button("set 0", 770, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
+            draw_text(f"{background_b}", sys_font30, (0,0,0), screen, 650 , 200)
+            button("set 0", 770, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button("-", 900, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+
+            if pressed[pygame.K_r]:
+                if background_r >= 255:
+                    background_r = 0
+            if pressed[pygame.K_g]:
+                if background_g >= 255:
+                    background_g = 0
+            if pressed[pygame.K_b]:
+                if background_b >= 255:
+                    background_b = 0
+
+        #endregion
 
 
 
 
     topbar()
 
+    print(background_b)
 
     pygame.display.flip()
     clock.tick(fps)
