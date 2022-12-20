@@ -106,17 +106,12 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
     global option
     global sites
     global scan_switch
-    global background_r
-    global background_g
-    global background_b
 
     if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
         pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
         if maus_klick[0] == 1 and maus_aktiv == False:
             maus_aktiv = True
-            if but_txt != "-"
-            if but_txt != "+":
-                option = but_txt
+            option = but_txt
 
             if but_txt == "Baugruppen":
                 sites = "Baugruppen"
@@ -132,18 +127,65 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
                 scan_switch = "Leiterplatte"
             elif but_txt == "Baugruppe":
                 scan_switch = "Baugruppe"
-            if but_txt == "+" and but_x == 100:
-                background_r += 1
-            if but_txt == "-"and but_x == 100:
-                background_r -= 1
-            if but_txt == "+" and but_x == 150:
-                background_g += 1
-            if but_txt == "-"and but_x == 150:
-                background_g -= 1
-            if but_txt == "+" and but_x == 200:
-                background_b += 1
-            if but_txt == "-"and but_x == 200:
-                background_b -= 1
+        if maus_klick[0] == 0:
+            maus_aktiv = False
+    else:
+        pygame.draw.rect(screen, but_color_0, (but_x, but_y, but_laenge, but_hoehe))
+    textGrund, textkasten = textObjekt(but_txt, but_font)
+    textkasten.center = ((but_x+(but_laenge/2)),(but_y+(but_hoehe/2)))
+    screen.blit(textGrund, textkasten)
+
+def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_1, but_font):
+    global maus_aktiv
+    global option_setting
+    global set_0_r
+    global set_0_g
+    global set_0_b
+    global background_r
+    global background_g
+    global background_b
+
+    if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
+        pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
+        if maus_klick[0] == 1 and maus_aktiv == False:
+            maus_aktiv = True
+
+            if but_txt == "+" and but_y == 100:
+                option_setting = "+"
+                if background_r < 255:
+                    background_r += 1
+                else:
+                    background_r = 0
+            elif but_txt == "-" and but_y == 100:
+                option_setting = "-"
+                if background_r > 0:
+                    background_r -= 1
+                else:
+                    background_r = 255
+
+            if but_txt == "+" and but_y == 150:
+                option_setting = "+"
+                if background_g < 255:
+                    background_g += 1
+                else:
+                    background_g = 0
+            elif but_txt == "-" and but_y == 150:
+                option_setting = "-"
+                if background_g > 0:
+                    background_g -= 1
+                else:
+                    background_g = 255
+
+            if but_txt == "set 0" and but_y == 100:
+                background_r = 0
+            elif but_txt == "set 255" and but_y == 100:
+                background_r = 255
+
+
+
+
+
+
 
         if maus_klick[0] == 0:
             maus_aktiv = False
@@ -824,8 +866,6 @@ def material():
         draw_text(materials[13][3], sys_font30, (0,0,0), screen, 550 , 250)
         draw_text("Tiefbestand: ", sys_font30, (0,0,0), screen, 310 , 300)
         draw_text(materials[13][4], sys_font30, (0,0,0), screen, 550 , 300)
-
-
 def marker():
     if option == mlfb_analog[0][0]:
         pygame.draw.ellipse(screen, (255,0,0), [300,485,15,15])
@@ -1177,28 +1217,44 @@ while runtime:
     elif sites == "Settings":
         screen.fill((background_r, background_g, background_b))
         button("Backgroundcolor", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
+
         if option == "Backgroundcolor":
-            button("+", 400, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("+", 400, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
             draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
             draw_text(f"{background_r}", sys_font30, (0,0,0), screen, 650 , 100)
-            button("set 0", 770, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+
+            button_setting("+", 400, 150, 30, 30, (155,150,100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
             draw_text(f"{background_g}", sys_font30, (0,0,0), screen, 650 , 150)
-            button("set 0", 770, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 150, 30, 30, (155,150,100), (0,100,255), sys_font22)
+
+            button_setting("+", 400, 200, 30, 30, (155,150,100), (0,100,255), sys_font22)
             draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
             draw_text(f"{background_b}", sys_font30, (0,0,0), screen, 650 , 200)
-            button("set 0", 770, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button("-", 900, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 200, 30, 30, (155,150,100), (0,100,255), sys_font22)
 
             if pressed[pygame.K_r]:
                 if background_r >= 255:
                     background_r = 0
+                else:
+                    background_r +=1
             if pressed[pygame.K_g]:
                 if background_g >= 255:
                     background_g = 0
+                else:
+                    background_g +=1
             if pressed[pygame.K_b]:
                 if background_b >= 255:
                     background_b = 0
+                else:
+                    background_b +=1
 
         #endregion
 
@@ -1207,7 +1263,7 @@ while runtime:
 
     topbar()
 
-    print(background_b)
+    print(background_r)
 
     pygame.display.flip()
     clock.tick(fps)
