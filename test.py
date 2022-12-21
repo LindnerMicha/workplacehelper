@@ -144,46 +144,167 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
     global background_r
     global background_g
     global background_b
+    global buttoncolor_r
+    global buttoncolor_g
+    global buttoncolor_b
+    global topbar_r
+    global topbar_g
+    global topbar_b
 
     if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
         pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
         if maus_klick[0] == 1 and maus_aktiv == False:
             maus_aktiv = True
+            if option == "Backgroundcolor":
+                if but_txt == "+" and but_y == 100:
+                    option_setting = "+"
+                    if background_r < 255:
+                        background_r += 1
+                    else:
+                        background_r = 0
+                elif but_txt == "-" and but_y == 100:
+                    option_setting = "-"
+                    if background_r > 0:
+                        background_r -= 1
+                    else:
+                        background_r = 255
+                if but_txt == "+" and but_y == 150:
+                    option_setting = "+"
+                    if background_g < 255:
+                        background_g += 1
+                    else:
+                        background_g = 0
+                elif but_txt == "-" and but_y == 150:
+                    option_setting = "-"
+                    if background_g > 0:
+                        background_g -= 1
+                    else:
+                        background_g = 255
+                if but_txt == "+" and but_y == 200:
+                    option_setting = "+"
+                    if background_b < 255:
+                        background_b += 1
+                    else:
+                        background_b = 0
+                elif but_txt == "-" and but_y == 200:
+                    option_setting = "-"
+                    if background_b > 0:
+                        background_b -= 1
+                    else:
+                        background_b = 255
 
-            if but_txt == "+" and but_y == 100:
-                option_setting = "+"
-                if background_r < 255:
-                    background_r += 1
-                else:
+                if but_txt == "set 0" and but_y == 100:
                     background_r = 0
-            elif but_txt == "-" and but_y == 100:
-                option_setting = "-"
-                if background_r > 0:
-                    background_r -= 1
-                else:
+                elif but_txt == "set 255" and but_y == 100:
                     background_r = 255
-
-            if but_txt == "+" and but_y == 150:
-                option_setting = "+"
-                if background_g < 255:
-                    background_g += 1
-                else:
+                if but_txt == "set 0" and but_y == 150:
                     background_g = 0
-            elif but_txt == "-" and but_y == 150:
-                option_setting = "-"
-                if background_g > 0:
-                    background_g -= 1
-                else:
+                elif but_txt == "set 255" and but_y == 150:
                     background_g = 255
+                if but_txt == "set 0" and but_y == 200:
+                    background_b = 0
+                elif but_txt == "set 255" and but_y == 200:
+                    background_b = 255
+            elif option == "Buttoncolor":
+                if but_txt == "+" and but_y == 100:
+                    option_setting = "+"
+                    if buttoncolor_r < 255:
+                        buttoncolor_r += 1
+                    else:
+                        buttoncolor_r = 0
+                elif but_txt == "-" and but_y == 100:
+                    option_setting = "-"
+                    if buttoncolor_r > 0:
+                        buttoncolor_r -= 1
+                    else:
+                        buttoncolor_r = 255
+                if but_txt == "+" and but_y == 150:
+                    option_setting = "+"
+                    if buttoncolor_g < 255:
+                        buttoncolor_g += 1
+                    else:
+                        buttoncolor_g = 0
+                elif but_txt == "-" and but_y == 150:
+                    option_setting = "-"
+                    if buttoncolor_g > 0:
+                        buttoncolor_g -= 1
+                    else:
+                        buttoncolor_g = 255
+                if but_txt == "+" and but_y == 200:
+                    option_setting = "+"
+                    if buttoncolor_b < 255:
+                        buttoncolor_b += 1
+                    else:
+                        buttoncolor_b = 0
+                elif but_txt == "-" and but_y == 200:
+                    option_setting = "-"
+                    if buttoncolor_b > 0:
+                        buttoncolor_b -= 1
+                    else:
+                        buttoncolor_b = 255
 
-            if but_txt == "set 0" and but_y == 100:
-                background_r = 0
-            elif but_txt == "set 255" and but_y == 100:
-                background_r = 255
+                if but_txt == "set 0" and but_y == 100:
+                    buttoncolor_r = 0
+                elif but_txt == "set 255" and but_y == 100:
+                    buttoncolor_r = 255
+                if but_txt == "set 0" and but_y == 150:
+                    buttoncolor_g = 0
+                elif but_txt == "set 255" and but_y == 150:
+                    buttoncolor_g = 255
+                if but_txt == "set 0" and but_y == 200:
+                    buttoncolor_b = 0
+                elif but_txt == "set 255" and but_y == 200:
+                    buttoncolor_b = 255
+            elif option == "Topbarcolor":
+                if but_txt == "+" and but_y == 100:
+                    option_setting = "+"
+                    if topbar_r < 255:
+                        topbar_r += 1
+                    else:
+                        topbar_r = 0
+                elif but_txt == "-" and but_y == 100:
+                    option_setting = "-"
+                    if topbar_r > 0:
+                        topbar_r -= 1
+                    else:
+                        topbar_r = 255
+                if but_txt == "+" and but_y == 150:
+                    option_setting = "+"
+                    if topbar_g < 255:
+                        topbar_g += 1
+                    else:
+                        topbar_g = 0
+                elif but_txt == "-" and but_y == 150:
+                    option_setting = "-"
+                    if topbar_g > 0:
+                        topbar_g -= 1
+                    else:
+                        topbar_g = 255
+                if but_txt == "+" and but_y == 200:
+                    option_setting = "+"
+                    if topbar_b < 255:
+                        topbar_b += 1
+                    else:
+                        topbar_b = 0
+                elif but_txt == "-" and but_y == 200:
+                    option_setting = "-"
+                    if topbar_b > 0:
+                        topbar_b -= 1
+                    else:
+                        topbar_b = 255
 
-
-
-
+                if but_txt == "set 0" and but_y == 100:
+                    topbar_r = 0
+                elif but_txt == "set 255" and but_y == 100:
+                    topbar_r = 255
+                if but_txt == "set 0" and but_y == 150:
+                    topbar_g = 0
+                elif but_txt == "set 255" and but_y == 150:
+                    topbar_g = 255
+                if but_txt == "set 0" and but_y == 200:
+                    topbar_b = 0
+                elif but_txt == "set 255" and but_y == 200:
+                    topbar_b = 255
 
 
 
@@ -204,43 +325,43 @@ def draw_text(text, sys_font15, color, screen, x , y):
     screen.blit(textobj, textrect)
 
 def topbar():
-    pygame.draw.rect(screen, (168, 165, 165), (0,0,w, 60))
-    button("Baugruppen", 10, 8, 150, 45, (155,150,100), (0,100,255), sys_font30)
-    button("Material", 200, 8, 150, 45, (155,150,100), (0,100,255), sys_font30)
-    button("Suchen", 400, 8, 150, 45, (155, 150,100), (0, 100, 255), sys_font30)
-    button("Settings", 800, 8, 150, 45, (155, 150,100), (0, 100, 255), sys_font30)
+    pygame.draw.rect(screen, (topbar_r, topbar_g, topbar_b), (0,0,w, 60))
+    button("Baugruppen", 10, 8, 150, 45, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font30)
+    button("Material", 200, 8, 150, 45, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font30)
+    button("Suchen", 400, 8, 150, 45, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0, 100, 255), sys_font30)
+    button("Settings", 800, 8, 150, 45, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0, 100, 255), sys_font30)
     button("Exit", 1030, 8, 150, 45, (186, 48, 48), (133, 1, 1), sys_font30)
 
 def baugruppen():
     #region -> Buttons
-    button(mlfb_digital[0][0], 0, 60, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[1][0], 0, 90, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[2][0], 0, 120, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[3][0], 0, 150, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[4][0], 0, 180, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(mlfb_digital[0][0], 0, 60, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[1][0], 0, 90, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[2][0], 0, 120, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[3][0], 0, 150, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[4][0], 0, 180, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,210,300, 30))
-    button(mlfb_digital[5][0], 0, 240, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[6][0], 0, 270, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[7][0], 0, 300, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[8][0], 0, 330, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[9][0], 0, 360, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[10][0], 0, 390, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_digital[11][0], 0, 420, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(mlfb_digital[5][0], 0, 240, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[6][0], 0, 270, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[7][0], 0, 300, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[8][0], 0, 330, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[9][0], 0, 360, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[10][0], 0, 390, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[11][0], 0, 420, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,450,300, 30))
-    button(mlfb_analog[0][0], 0, 480, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[1][0], 0, 510, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[2][0], 0, 540, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[3][0], 0, 570, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[4][0], 0, 600, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[5][0], 0, 630, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[6][0], 0, 660, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[7][0], 0, 690, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[8][0], 0, 720, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(mlfb_analog[0][0], 0, 480, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[1][0], 0, 510, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[2][0], 0, 540, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[3][0], 0, 570, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[4][0], 0, 600, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[5][0], 0, 630, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[6][0], 0, 660, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[7][0], 0, 690, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[8][0], 0, 720, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,750,300, 30))
-    button(mlfb_analog[9][0], 0, 780, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[10][0], 0, 810, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[11][0], 0, 840, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(mlfb_analog[12][0], 0, 870, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(mlfb_analog[9][0], 0, 780, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[10][0], 0, 810, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[11][0], 0, 840, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[12][0], 0, 870, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     draw_text("PEMO's", sys_font60, (0,0,0), screen, 675 , 80)
     draw_text(option, sys_font30, (0,0,0), screen, 675 , 140)
     draw_text("SP1", sys_font30, (0,0,0), screen, 370 , 235)
@@ -690,23 +811,23 @@ def baugruppen():
     #endregion
 def material():
     pygame.draw.rect(screen, (168, 165, 165), (0,0,300, h))
-    button(materials[0][0], 0, 60, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[1][0], 0, 90, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[2][0], 0, 120, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[3][0], 0, 150, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(materials[0][0], 0, 60, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[1][0], 0, 90, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[2][0], 0, 120, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[3][0], 0, 150, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,180,300, 30))
-    button(materials[4][0], 0, 210, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[5][0], 0, 240, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[6][0], 0, 270, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(materials[4][0], 0, 210, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[5][0], 0, 240, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[6][0], 0, 270, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,300,300, 30))
-    button(materials[7][0], 0, 330, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[8][0], 0, 360, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[9][0], 0, 390, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[10][0], 0, 420, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(materials[7][0], 0, 330, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[8][0], 0, 360, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[9][0], 0, 390, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[10][0], 0, 420, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
     pygame.draw.rect(screen, (168, 165, 165), (0,450,300, 30))
-    button(materials[11][0], 0, 480, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[12][0], 0, 510, 300, 30, (155,150,100), (0,100,255), sys_font22)
-    button(materials[13][0], 0, 540, 300, 30, (155,150,100), (0,100,255), sys_font22)
+    button(materials[11][0], 0, 480, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[12][0], 0, 510, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(materials[13][0], 0, 540, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
 
     if option == materials[0][0]:
         draw_text(materials[0][0], sys_font30, (100,0,0), screen, 310 , 100)
@@ -920,6 +1041,14 @@ background_g = 255
 background_b = 255
 plus_minus = " "
 
+buttoncolor_r = 155
+buttoncolor_g = 150
+buttoncolor_b = 108
+#155, 150, 100
+
+topbar_r = 168
+topbar_g = 165
+topbar_b = 165
 
 while runtime:
 
@@ -971,11 +1100,11 @@ while runtime:
 
 
 
-        button("Suche", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
-        button("Neue Suche", 0, 130, 300, 30, (155,150,100), (0,100,255), sys_font22)
-        button("Im System suchen", 400, 200, 235, 30, (155,150,100), (0,100,255), sys_font22)
-        button("Leiterplatte", 900, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
-        button("Baugruppe", 900, 130, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Suche", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Neue Suche", 0, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Im System suchen", 400, 200, 235, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Leiterplatte", 900, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Baugruppe", 900, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
         if scan_switch == "Leiterplatte":
             pygame.draw.ellipse(screen, (255,0,0), [880,110,15,15])
         if scan_switch == "Baugruppe":
@@ -1216,29 +1345,31 @@ while runtime:
                 set_error = True
     elif sites == "Settings":
         screen.fill((background_r, background_g, background_b))
-        button("Backgroundcolor", 0, 100, 300, 30, (155,150,100), (0,100,255), sys_font22)
+        button("Backgroundcolor", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Buttoncolor", 0, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Topbarcolor", 0, 160, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
 
         if option == "Backgroundcolor":
-            button_setting("+", 400, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("+", 400, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
             draw_text(f"{background_r}", sys_font30, (0,0,0), screen, 650 , 100)
-            button_setting("set 0", 770, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("set 255", 870, 100, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("-", 1000, 100, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
 
-            button_setting("+", 400, 150, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
             draw_text(f"{background_g}", sys_font30, (0,0,0), screen, 650 , 150)
-            button_setting("set 0", 770, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("set 255", 870, 150, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("-", 1000, 150, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
 
-            button_setting("+", 400, 200, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("+", 400, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
             draw_text(f"{background_b}", sys_font30, (0,0,0), screen, 650 , 200)
-            button_setting("set 0", 770, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("set 255", 870, 200, 60, 30, (155,150,100), (0,100,255), sys_font22)
-            button_setting("-", 1000, 200, 30, 30, (155,150,100), (0,100,255), sys_font22)
+            button_setting("set 0", 770, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             if pressed[pygame.K_r]:
                 if background_r >= 255:
@@ -1255,15 +1386,87 @@ while runtime:
                     background_b = 0
                 else:
                     background_b +=1
+        elif option == "Buttoncolor":
+            button_setting("+", 400, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
+            draw_text(f"{buttoncolor_r}", sys_font30, (0,0,0), screen, 650 , 100)
+            button_setting("set 0", 770, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
 
-        #endregion
+            button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
+            draw_text(f"{buttoncolor_g}", sys_font30, (0,0,0), screen, 650 , 150)
+            button_setting("set 0", 770, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+
+            button_setting("+", 400, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
+            draw_text(f"{buttoncolor_b}", sys_font30, (0,0,0), screen, 650 , 200)
+            button_setting("set 0", 770, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+
+            if pressed[pygame.K_r]:
+                if buttoncolor_r >= 255:
+                    buttoncolor_r = 0
+                else:
+                    buttoncolor_r +=1
+            if pressed[pygame.K_g]:
+                if buttoncolor_g >= 255:
+                    buttoncolor_g = 0
+                else:
+                    buttoncolor_g +=1
+            if pressed[pygame.K_b]:
+                if buttoncolor_b >= 255:
+                    buttoncolor_b = 0
+                else:
+                    buttoncolor_b +=1
+        elif option == "Topbarcolor":
+            button_setting("+", 400, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Red[r]", sys_font30, (0,0,0), screen, 480 , 100)
+            draw_text(f"{topbar_r}", sys_font30, (0,0,0), screen, 650 , 100)
+            button_setting("set 0", 770, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+
+            button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
+            draw_text(f"{topbar_g}", sys_font30, (0,0,0), screen, 650 , 150)
+            button_setting("set 0", 770, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 150, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+
+            button_setting("+", 400, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+            draw_text("Blue[b]", sys_font30, (0,0,0), screen, 480 , 200)
+            draw_text(f"{topbar_b}", sys_font30, (0,0,0), screen, 650 , 200)
+            button_setting("set 0", 770, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("set 255", 870, 200, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("-", 1000, 200, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
+
+            if pressed[pygame.K_r]:
+                if topbar_r >= 255:
+                    topbar_r = 0
+                else:
+                    topbar_r +=1
+            if pressed[pygame.K_g]:
+                if topbar_g >= 255:
+                    topbar_g = 0
+                else:
+                    topbar_g +=1
+            if pressed[pygame.K_b]:
+                if topbar_b >= 255:
+                    topbar_b = 0
+                else:
+                    topbar_b +=1
+
 
 
 
 
     topbar()
 
-    print(background_r)
 
     pygame.display.flip()
     clock.tick(fps)
