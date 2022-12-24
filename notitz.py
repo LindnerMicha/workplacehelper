@@ -324,3 +324,29 @@ elif but_txt == "set 255" and but_y == 200:
                     text_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     text_b = 255
+
+
+
+
+
+
+
+
+
+background_r = 255
+background_g = 255
+background_b = 255
+plus_minus = " "
+
+buttoncolor_r = 155
+buttoncolor_g = 150
+buttoncolor_b = 108
+#155, 150, 100
+
+topbar_r = 168
+topbar_g = 165
+topbar_b = 165
+
+text_r = 0
+text_g = 0
+text_b = 0
