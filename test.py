@@ -262,8 +262,12 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     print("Test Save")
                     file = open(save_dir,'w+')
                     file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
-
-
+                if but_txt == "Set to Default":
+                    background_r = 255
+                    background_g = 255
+                    background_b = 255
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Buttoncolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -314,6 +318,17 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     buttoncolor_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     buttoncolor_b = 255
+
+                if but_txt == "Save":
+                    print("Test Save")
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    buttoncolor_r = 155
+                    buttoncolor_g = 150
+                    buttoncolor_b = 108
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Topbarcolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -364,6 +379,16 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     topbar_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     topbar_b = 255
+                if but_txt == "Save":
+                    print("Test Save")
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    topbar_r = 168
+                    topbar_g = 165
+                    topbar_b = 165
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Textcolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -414,6 +439,15 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     text_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     text_b = 255
+                if but_txt == "Save":
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    text_r = 0
+                    text_g = 0
+                    text_b = 0
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
 
 
         if maus_klick[0] == 0:
@@ -1468,6 +1502,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1506,6 +1541,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1544,6 +1580,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1582,6 +1619,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
@@ -1618,7 +1656,6 @@ while runtime:
 
 
     topbar()
-    #print(save_list)
     file.close()
 
 

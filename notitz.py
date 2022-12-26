@@ -350,3 +350,18 @@ topbar_b = 165
 text_r = 0
 text_g = 0
 text_b = 0
+
+
+
+background_r = 255
+background_g = 255
+background_b = 255
+buttoncolor_r = 155
+buttoncolor_g = 150
+buttoncolor_b = 108
+topbar_r = 168
+topbar_g = 165
+topbar_b = 165
+text_r = 0
+text_g = 0
+text_b = 0
