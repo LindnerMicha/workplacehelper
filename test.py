@@ -1,8 +1,12 @@
+import os.path
+
 import pygame
 import sys
 import time
 from urllib import request
 import tkinter as tk
+
+application_path = os.path.dirname(sys.executable)
 
 pygame.init()
 w, h = 1200, 900
@@ -19,8 +23,8 @@ FONT = pygame.font.Font(None, 32)
 
 screen = pygame.display.set_mode([w, h])
 pygame.display.set_caption("Workplace Helper")
-s_icon = pygame.image.load("icon/slogo.png").convert_alpha()
-pygame.display.set_icon(s_icon)
+#s_icon = pygame.image.load("icon/slogo.png").convert_alpha()
+#pygame.display.set_icon(s_icon)
 clock = pygame.time.Clock()
 fps = 60
 

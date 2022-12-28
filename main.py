@@ -1,7 +1,12 @@
+import os.path
+
 import pygame
 import sys
+import time
 from urllib import request
 import tkinter as tk
+
+application_path = os.path.dirname(sys.executable)
 
 pygame.init()
 w, h = 1200, 900
@@ -18,8 +23,8 @@ FONT = pygame.font.Font(None, 32)
 
 screen = pygame.display.set_mode([w, h])
 pygame.display.set_caption("Workplace Helper")
-s_icon = pygame.image.load("icon/slogo.png").convert_alpha()
-pygame.display.set_icon(s_icon)
+#s_icon = pygame.image.load("icon/slogo.png").convert_alpha()
+#pygame.display.set_icon(s_icon)
 clock = pygame.time.Clock()
 fps = 60
 
@@ -27,6 +32,8 @@ option = " "
 sites = "Material"
 scan_switch = "Leiterplatte"
 
+
+save_dir = "C:\\Users\\micha\\Desktop\\python_log.txt"
 
 
 
@@ -254,6 +261,17 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     background_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     background_b = 255
+
+                if but_txt == "Save":
+                    print("Test Save")
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    background_r = 255
+                    background_g = 255
+                    background_b = 255
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Buttoncolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -304,6 +322,17 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     buttoncolor_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     buttoncolor_b = 255
+
+                if but_txt == "Save":
+                    print("Test Save")
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    buttoncolor_r = 155
+                    buttoncolor_g = 150
+                    buttoncolor_b = 108
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Topbarcolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -354,6 +383,16 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     topbar_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     topbar_b = 255
+                if but_txt == "Save":
+                    print("Test Save")
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    topbar_r = 168
+                    topbar_g = 165
+                    topbar_b = 165
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
             elif option == "Textcolor":
                 if but_txt == "+" and but_y == 100:
                     option_setting = "+"
@@ -404,6 +443,15 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
                     text_b = 0
                 elif but_txt == "set 255" and but_y == 200:
                     text_b = 255
+                if but_txt == "Save":
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                if but_txt == "Set to Default":
+                    text_r = 0
+                    text_g = 0
+                    text_b = 0
+                    file = open(save_dir,'w+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
 
 
         if maus_klick[0] == 0:
@@ -416,6 +464,8 @@ def button_setting(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, bu
 
 #endregion
 #region -> Funktionen
+
+
 def draw_text(text, sys_font15, color, screen, x , y):
     textobj = sys_font15.render(text, 1, color)
     textrect = textobj.get_rect()
@@ -1116,10 +1166,45 @@ def marker():
 #endregion
 
 
+try:
+    file = open(save_dir,'r')
+    save = file.read()
+    save_list = save.split(",")
+    print("Try")
+except:
+    print("File erstellt")
+    file = open(save_dir,'a+')
+    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+    print("except")
+    file = open(save_dir,'r')
+    save = file.read()
+    save_list = save.split(",")
+    print(file.read())
+
+
+background_r = int(save_list[0])
+background_g = int(save_list[1])
+background_b = int(save_list[2])
+
+buttoncolor_r = int(save_list[3])
+buttoncolor_g = int(save_list[4])
+buttoncolor_b = int(save_list[5])
+#155, 150, 100
+
+topbar_r = int(save_list[6])
+topbar_g = int(save_list[7])
+topbar_b = int(save_list[8])
+
+text_r = int(save_list[9])
+text_g = int(save_list[10])
+text_b = int(save_list[11])
+
+
+
 
 while runtime:
 
-    screen.fill((background_r, background_g, background_b))
+    screen.fill((int(background_r), int(background_g), int(background_b)))
 
     maus_pos = pygame.mouse.get_pos()
     maus_klick = pygame.mouse.get_pressed()
@@ -1421,6 +1506,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1459,6 +1545,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1497,6 +1584,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (text_r,text_g,text_b), screen, 480 , 150)
@@ -1535,6 +1623,7 @@ while runtime:
             button_setting("set 255", 870, 100, 60, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("-", 1000, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             button_setting("Save", 400, 250, 100, 30, (155, 150, 100), (0,100,255), sys_font22)
+            button_setting("Set to Default", 550, 250, 130, 30, (155, 150, 100), (0,100,255), sys_font22)
 
             button_setting("+", 400, 150, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
             draw_text("Green[g]", sys_font30, (0,0,0), screen, 480 , 150)
@@ -1571,6 +1660,14 @@ while runtime:
 
 
     topbar()
+    file.close()
+
+
+
+
+
+
+
 
 
     pygame.display.flip()
