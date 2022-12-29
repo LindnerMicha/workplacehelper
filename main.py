@@ -1497,6 +1497,7 @@ while runtime:
         button("Buttoncolor", 0, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
         button("Topbarcolor", 0, 160, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
         button("Textcolor", 0, 190, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        button("Support", 0, 269, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
 
         if option == "Backgroundcolor":
             button_setting("+", 400, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
@@ -1654,8 +1655,12 @@ while runtime:
                     text_b = 0
                 else:
                     text_b +=1
-
-
+        elif option == "Support":
+            draw_text("Bei Problemen, Fragen oder benötigten Neuimplementierungen", sys_font30, (text_r,text_g,text_b), screen, 430 , 100)
+            draw_text("über Team / E-Mail melden", sys_font30, (text_r,text_g,text_b), screen, 600 , 150)
+            draw_text("michael.lindner@siemens.com", sys_font30, (text_r,text_g,text_b), screen, 585 , 300)
+            draw_text("Copyrighted by Michael Lindner", sys_font30, (text_r,text_g,text_b), screen, 585 , 840)
+            draw_text("Siemens AG Amberg", sys_font30, (text_r,text_g,text_b), screen, 650 , 870)
 
 
 
