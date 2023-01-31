@@ -365,3 +365,491 @@ topbar_b = 165
 text_r = 0
 text_g = 0
 text_b = 0
+
+
+
+
+
+
+
+
+
+#region Zeichnen
+def baugruppen():
+    #region -> Buttons
+    button(mlfb_digital[0][0], 0, 60, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[1][0], 0, 90, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[2][0], 0, 120, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[3][0], 0, 150, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[4][0], 0, 180, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    pygame.draw.rect(screen, (168, 165, 165), (0,210,300, 30))
+    button(mlfb_digital[5][0], 0, 240, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[6][0], 0, 270, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[7][0], 0, 300, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[8][0], 0, 330, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[9][0], 0, 360, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[10][0], 0, 390, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_digital[11][0], 0, 420, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    pygame.draw.rect(screen, (168, 165, 165), (0,450,300, 30))
+    button(mlfb_analog[0][0], 0, 480, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[1][0], 0, 510, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[2][0], 0, 540, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[3][0], 0, 570, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[4][0], 0, 600, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[5][0], 0, 630, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[6][0], 0, 660, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[7][0], 0, 690, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[8][0], 0, 720, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    pygame.draw.rect(screen, (168, 165, 165), (0,750,300, 30))
+    button(mlfb_analog[9][0], 0, 780, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[10][0], 0, 810, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[11][0], 0, 840, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    button(mlfb_analog[12][0], 0, 870, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+    draw_text("PEMO's", sys_font60, (text_r,text_g,text_b), screen, 675 , 80)
+    draw_text(option, sys_font30, (text_r,text_g,text_b), screen, 675 , 140)
+    draw_text("SP1", sys_font30, (text_r,text_g,text_b), screen, 370 , 235)
+    pygame.draw.rect(screen, (168, 165, 165), (460,200,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (660,200,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (860,200,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (1050,200,85, 85))
+    draw_text("SP2", sys_font30, (text_r,text_g,text_b), screen, 370 , 335)
+    pygame.draw.rect(screen, (168, 165, 165), (460,300,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (660,300,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (860,300,85, 85))
+    pygame.draw.rect(screen, (168, 165, 165), (1050,300,85, 85))
+    draw_text("Vorwärme", sys_font30, (text_r,text_g,text_b), screen, 310 , 435)
+    pygame.draw.rect(screen, (168, 165, 165), (460,400,85, 85))
+    #endregion
+    #region -> Wärmeindec
+    if option == mlfb_digital[0][0] and mlfb_digital[0][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[0][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[1][0] and mlfb_digital[1][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[1][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[2][0] and mlfb_digital[2][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[2][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[3][0] and mlfb_digital[3][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[3][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[4][0] and mlfb_digital[4][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[4][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[5][0] and mlfb_digital[5][7]:
+        pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[5][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[6][0] and mlfb_digital[6][7]:
+        pygame.draw.rect(screen, (6, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[6][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[7][0] and mlfb_digital[7][7]:
+        pygame.draw.rect(screen, (7, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[7][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[8][0] and mlfb_digital[8][7]:
+        pygame.draw.rect(screen, (8, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[8][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[9][0] and mlfb_digital[9][7]:
+        pygame.draw.rect(screen, (9, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[9][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[10][0] and mlfb_digital[10][7]:
+        pygame.draw.rect(screen, (7, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[10][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_digital[11][0] and mlfb_digital[11][7]:
+        pygame.draw.rect(screen, (8, 255, 0), (460,400,85, 85))
+    elif option == mlfb_digital[11][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+
+    if option == mlfb_analog[0][0] and mlfb_analog[0][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[0][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[1][0] and mlfb_analog[1][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[1][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[2][0] and mlfb_analog[2][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[2][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[3][0] and mlfb_analog[3][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[3][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[4][0] and mlfb_analog[4][7]:
+        pygame.draw.rect(screen, (0, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[4][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[5][0] and mlfb_analog[5][7]:
+        pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[5][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[6][0] and mlfb_analog[6][7]:
+        pygame.draw.rect(screen, (6, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[6][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[7][0] and mlfb_analog[7][7]:
+        pygame.draw.rect(screen, (7, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[7][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[8][0] and mlfb_analog[8][7]:
+        pygame.draw.rect(screen, (8, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[8][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[9][0] and mlfb_analog[9][7]:
+        pygame.draw.rect(screen, (9, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[9][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[10][0] and mlfb_analog[10][7]:
+        pygame.draw.rect(screen, (7, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[10][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[11][0] and mlfb_analog[11][7]:
+        pygame.draw.rect(screen, (8, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[11][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    if option == mlfb_analog[12][0] and mlfb_analog[12][7]:
+        pygame.draw.rect(screen, (9, 255, 0), (460,400,85, 85))
+    elif option == mlfb_analog[12][0]:
+        pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+    #endregion
+    #region -> UI Zeichnen
+    if option == mlfb_digital[0][0]:
+        draw_text(mlfb_digital[0][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[0][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[0][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[0][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[0][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[0][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[0][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[0][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[0][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[0][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[1][0]:
+        draw_text(mlfb_digital[1][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[1][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[1][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[1][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[1][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[1][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[1][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[1][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[1][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[1][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[2][0]:
+        draw_text(mlfb_digital[2][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[2][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[2][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[2][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[2][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[2][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[2][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[2][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[2][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[2][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[3][0]:
+        draw_text(mlfb_digital[3][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[3][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[3][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[3][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[3][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[3][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[3][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[3][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[3][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[3][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[4][0]:
+        draw_text(mlfb_digital[4][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[4][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[4][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[4][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[4][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[4][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[4][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[4][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[4][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[4][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[5][0]:
+        draw_text(mlfb_digital[5][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[5][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[5][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[5][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[5][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[5][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[5][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[5][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[5][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[5][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[6][0]:
+        draw_text(mlfb_digital[6][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[6][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[6][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[6][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[6][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[6][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[6][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[6][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[6][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[6][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[7][0]:
+        draw_text(mlfb_digital[7][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[7][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[7][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[7][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[7][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[7][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[7][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[7][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[7][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[7][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[8][0]:
+        draw_text(mlfb_digital[8][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[8][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[8][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[8][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[8][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[8][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[8][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[8][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[8][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[8][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[9][0]:
+        draw_text(mlfb_digital[9][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[9][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[9][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[9][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[9][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[9][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[9][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[9][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[9][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[9][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[10][0]:
+        draw_text(mlfb_digital[10][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[10][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[10][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[10][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[10][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[10][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[10][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[10][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[10][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[10][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_digital[11][0]:
+        draw_text(mlfb_digital[11][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_digital[11][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_digital[11][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_digital[11][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_digital[11][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_digital[11][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_digital[11][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_digital[11][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_digital[11][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_digital[11][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+
+
+    if option == mlfb_analog[0][0]:
+        draw_text(mlfb_analog[0][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[0][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[0][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[0][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[0][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[0][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[0][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[0][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[0][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[0][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[1][0]:
+        draw_text(mlfb_analog[1][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[1][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[1][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[1][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[1][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[1][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[1][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[1][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[1][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[1][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[2][0]:
+        draw_text(mlfb_analog[2][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[2][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[2][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[2][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[2][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[2][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[2][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[2][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[2][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[2][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[3][0]:
+        draw_text(mlfb_analog[3][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[3][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[3][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[3][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[3][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[3][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[3][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[3][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[3][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[3][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[4][0]:
+        draw_text(mlfb_analog[4][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[4][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[4][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[4][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[4][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[4][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[4][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[4][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[4][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[4][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[5][0]:
+        draw_text(mlfb_analog[5][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[5][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[5][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[5][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[5][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[5][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[5][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[5][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[5][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[5][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[6][0]:
+        draw_text(mlfb_analog[6][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[6][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[6][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[6][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[6][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[6][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[6][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[6][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[6][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[6][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[7][0]:
+        draw_text(mlfb_analog[7][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[7][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[7][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[7][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[7][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[7][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[7][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[7][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[7][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[7][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[8][0]:
+        draw_text(mlfb_analog[8][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[8][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[8][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[8][8], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[8][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[8][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[8][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[8][9], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[8][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[8][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[9][0]:
+        draw_text(mlfb_analog[9][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[9][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[9][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[9][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[9][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[9][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[9][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[9][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[9][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[9][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[10][0]:
+        draw_text(mlfb_analog[10][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[10][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[10][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[10][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[10][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[10][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[10][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[10][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[10][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[10][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[11][0]:
+        draw_text(mlfb_analog[11][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[11][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[11][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[11][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[11][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[11][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[11][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[11][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[11][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[11][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    if option == mlfb_analog[12][0]:
+        draw_text(mlfb_analog[12][3], sys_font30, (text_r,text_g,text_b), screen, 490 , 230)
+        draw_text(mlfb_analog[12][4], sys_font30, (text_r,text_g,text_b), screen, 690 , 230)
+        draw_text(mlfb_analog[12][4], sys_font30, (text_r,text_g,text_b), screen, 890 , 230)
+        draw_text(mlfb_analog[12][3], sys_font30, (text_r,text_g,text_b), screen, 1080 , 230)
+        draw_text(mlfb_analog[12][5], sys_font30, (text_r,text_g,text_b), screen, 490 , 330)
+        draw_text(mlfb_analog[12][6], sys_font30, (text_r,text_g,text_b), screen, 690 , 330)
+        draw_text(mlfb_analog[12][6], sys_font30, (text_r,text_g,text_b), screen, 890 , 330)
+        draw_text(mlfb_analog[12][5], sys_font30, (text_r,text_g,text_b), screen, 1080 , 330)
+        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 550)
+        draw_text(mlfb_analog[12][1], sys_font30, (text_r,text_g,text_b), screen, 460 , 550)
+        draw_text("FBG-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 600)
+        draw_text(mlfb_analog[12][2], sys_font30, (text_r,text_g,text_b), screen, 460 , 600)
+    #endregion
+#endregion
