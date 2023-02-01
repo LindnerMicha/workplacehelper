@@ -79,7 +79,8 @@ text_b = 0
 login_kennung = ""
 login_but = False
 
-
+dig_an = "Digital"
+but_temp = 60
 
 
 mlfb_digital = [["131-6BF00-0CA0", "73643", "A5E45983869", " ", " ", " ", " ", 0],
@@ -87,7 +88,7 @@ mlfb_digital = [["131-6BF00-0CA0", "73643", "A5E45983869", " ", " ", " ", " ", 0
                 ["131-6BF01-0AA0", "69488", "A5E37018268", " ", " ", " ", " ", 0],
                 ["131-6BF01-0BA0", "69486", "A5E36861757", " ", " ", " ", " ", 0],
                 ["131-6BH01-0BA0", "69485", "A5E36775154", " ", " ", " ", " ", 0],
-
+                [" ", " ", " ", " ", " ", " ", " ", 0],
                 ["132-6BD20-0BA0", "73644", "A5E45998818", " ", " ", " ", " ", 0],
                 ["132-6BF00-0CA0", "69388", "A5E35772026", " ", " ", " ", " ", 0],
                 ["132-6BF01-0AA0", "69489", "A5E37061405", " ", " ", " ", " ", 0],
@@ -97,7 +98,7 @@ mlfb_digital = [["131-6BF00-0CA0", "73643", "A5E45983869", " ", " ", " ", " ", 0
                 ["132-6BH01-0BA0", "82467", "A5E51756149", " ", " ", " ", " ", 0]]
 
 mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", "37", " ", 0],
-                ["134-6FF00-0AA1", "77127", "A5E34098222", " ", " ", "37", " ", 1],
+                ["134-6FF00-0AA1", "77127", "A5E34098222", " ", " ", "37", " ", 0],
                 ["134-6GB00-0BA1", "75786", "A5E35649001", "37", " ", "39", " ", 0],
                 ["134-6GD01-0BA1", "73654", "A5E46004518", "37", " ", "37", "37", 0],
                 ["134-6GF00-0AA1", "69385", "A5E34097886", "37", " ", "37", "37", 0],
@@ -105,16 +106,13 @@ mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", "37", " ", 
                 ["134-6HB00-0DA1", "77532", "A5E50585786", "39", " ", "39", "37", 0],
                 ["134-6HD01-0BA1", "73655", "A5E46004505", "37", " ", "37", "37", 0],
                 ["134-6JD00-0CA1", "71259", "A5E38837676", "33", "1", "41", "1", 1, "49", "45"],
-
+                ["134-6TD00-0CA1", "77128", "A5E33211772", " ", " ", "40", "40", 0],
+                [" ", " ", " ", " ", " ", " ", " ", 0],
                 ["135-6GB00-0BA1", "77129", "A5E35652111", " ", " ", "37", " ", 1],
                 ["135-6HB00-0CA1", "69482", "A5E32562703", "37", "4", "37", "37", 1],
                 ["135-6HB00-0DA1", "69481", "A5E35652111", "37", "4", "37", "37", 1],
-                ["135-6HD00-0BA1", "69249", "A5E31290169", "37", "4", "37", "37", 0]]
-
-new_mlfb = [["134-6TD00-0CA1", "77128", "A5E33211772", " ", " ", "40", "40", 0],
-            ["137-6AA00-0BA1", "77343", "A5E43097490", " ", " ", "40", "40", 0]
-
-            ]
+                ["135-6HD00-0BA1", "69249", "A5E31290169", "37", "4", "37", "37", 0],
+                ["137-6AA00-0BA1", "77343", "A5E43097490", " ", " ", "40", "40", 0]]
 
 materials = [["Frontdeckel Dunkelblau", "65325", "A5E36039007", "3196 St.", "2970 St."],
              ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St."],
@@ -186,6 +184,8 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
                 sites = "Material"
             elif but_txt == "Exit":
                 sites = "Exit"
+                runtime = False
+                runtime_login = False
             elif but_txt == "Suchen":
                 sites = "Suchen"
             elif but_txt == "Settings":
@@ -508,13 +508,39 @@ def topbar():
     button("Exit", 1030, 8, 150, 45, (186, 48, 48), (133, 1, 1), sys_font30)
 
 def baugruppen():
+    global but_temp
     button("Digital", 25, 830, 100, 40, (buttoncolor_r, buttoncolor_g, buttoncolor_b), (0,100,255), sys_font22)
     button("Analog", 200, 830, 100, 40, (buttoncolor_r, buttoncolor_g, buttoncolor_b), (0,100,255), sys_font22)
 
+    but_temp = 60
+
     if dig_an == "Digital":
         for i in range(len(mlfb_digital)):
+            if mlfb_digital[i][0] == " ":
+                pygame.draw.rect(screen, (168, 165, 165), (0, but_temp, 300, 30))
+            else:
+                button(mlfb_digital[i][0], 0, but_temp, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+            but_temp += 30
+
+            if option == mlfb_digital[i][0]:
+                if mlfb_digital[i][7]:
+                    pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
+                else:
+                    pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+
     elif dig_an == "Analog":
-        for i in range(len(mlfb_analog)):
+        for k in range(len(mlfb_analog)):
+            if mlfb_analog[k][0] == " ":
+                pygame.draw.rect(screen, (168, 165, 165), (0, but_temp, 300, 30))
+            else:
+                button(mlfb_analog[k][0], 0, but_temp, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+            but_temp += 30
+
+            if option == mlfb_analog[k][0]:
+                if mlfb_analog[k][7]:
+                    pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
+                else:
+                    pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
 
     #position festlgen
     #if abfrage seitenumschalten
@@ -837,6 +863,8 @@ while runtime_programm:
         maus_klick = pygame.mouse.get_pressed()
         pressed = pygame.key.get_pressed()
 
+        if sites == "Exit":
+            runtime_programm = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1301,7 +1329,8 @@ while runtime_programm:
 
 
 
-
+        if sites == "Exit":
+            runtime_programm = False
         pygame.display.flip()
         clock.tick(fps)
 
