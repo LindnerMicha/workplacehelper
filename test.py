@@ -527,6 +527,9 @@ def baugruppen():
                     pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
                 else:
                     pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+            if mlfb_digital[i][0] == option:
+                #pemos
+                draw_text(f"Der Pemo ist {mlfb_digital[i][3]}", sys_font15, (0, 0, 0), screen, 300 , 300)
 
     elif dig_an == "Analog":
         for k in range(len(mlfb_analog)):
@@ -541,12 +544,11 @@ def baugruppen():
                     pygame.draw.rect(screen, (5, 255, 0), (460,400,85, 85))
                 else:
                     pygame.draw.rect(screen, (255, 0, 0), (460,400,85, 85))
+            if mlfb_analog[k][0] == option:
+                #pemos
+                pygame.draw.rect(screen, (5, 255, 0), (460,100,85, 85))
+                draw_text(mlfb_analog[k][3], sys_font30, (0, 0, 0), screen, 460+40 , 100+40)
 
-    #position festlgen
-    #if abfrage seitenumschalten
-    #for loop elemente ++ position
-
-    #if abfrage analog / digital -> Wärmeanzeige
 
 
 
