@@ -115,7 +115,6 @@ mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", " ", " ", 0
                 ["135-6HD00-0BA1", "69249", "A5E31290169", "37", "4", "4", "37", 0, "37", "37", "37", "37"],
                 ["137-6AA00-0BA1", "77343", "A5E43097490", " ", " ", " ", " ", 0, "40", "40", "40", "40"]]
 
-
 materials = [["Frontdeckel Dunkelblau", "65325", "A5E36039007", "3196 St.", "2970 St."],
              ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St."],
              ["Frontdeckel Schwarz", "65189", "A5E36039004", "3196 St.", "2970 St."],
@@ -559,13 +558,11 @@ def baugruppen():
 
             if option == mlfb_analog[k][0]:
                 if mlfb_analog[k][7]:
-                    pygame.draw.rect(screen, (5, 255, 0), (570,465,50, 50))
+                    pygame.draw.rect(screen, (5, 255, 0), (670,465,50, 50))
                 else:
-                    pygame.draw.rect(screen, (255, 0, 0), (570,465,50, 50))
+                    pygame.draw.rect(screen, (255, 0, 0), (670,465,50, 50))
             if mlfb_analog[k][0] == option:
-                draw_text("SP1: ", sys_font30, (0, 0, 0), screen, 460 , 135)
-                draw_text("SP2: ", sys_font30, (0, 0, 0), screen, 460 , 335)
-                draw_text("Wärme: ", sys_font30, (0, 0, 0), screen, 460 , 480)
+                draw_text("Wärme: ", sys_font30, (0, 0, 0), screen, 560 , 480)
                 pygame.draw.rect(screen, (192, 192, 192), (560,100,85, 85))
                 draw_text(mlfb_analog[k][3], sys_font30, (0, 0, 0), screen, 560+33, 100+35)
                 pygame.draw.rect(screen, (192, 192, 192), (660,100,85, 85))
@@ -797,98 +794,9 @@ def marker():
 
 
 
-
+runtime = True
 runtime_programm = True
 while runtime_programm:
-    while runtime_login:
-        runtime = False
-        maus_pos = pygame.mouse.get_pos()
-        maus_klick = pygame.mouse.get_pressed()
-        pressed = pygame.key.get_pressed()
-
-
-        if pressed[pygame.K_SPACE]:
-            runtime_programm = False
-
-
-        screen.fill((0, 0, 50))
-
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                runtime_programm = False
-                runtime_login = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                # If the user clicked on the input_box rect.
-                if input_box.collidepoint(event.pos):
-                    # Toggle the active variable.
-                    active = not active
-                else:
-                    active = False
-                # Change the current color of the input box.
-                color = color_active if active else color_inactive
-            elif event.type == pygame.KEYDOWN:
-                if active:
-                    if event.key == pygame.K_BACKSPACE:
-                        text = text[:-1]
-                    else:
-                        text += event.unicode
-
-        txt_surface = font.render(text, True, color)
-        width = max(200, txt_surface.get_width()+10)
-        input_box.w = width
-        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-        pygame.draw.rect(screen, color, input_box, 2)
-
-        draw_text("User Kennung", sys_font22, (255, 255, 255), screen, 515, 150)
-        draw_text("Login", sys_font60, (255, 255, 255), screen, 510, 50)
-        button("Anmelden", 470, 250, 200, 40, "Green", (19, 141, 158), sys_font30)
-
-        if login_but:
-            login_kennung = text
-            save_dir = f"C:\\Users\\{login_kennung}\\Documents\\python_log.txt"
-            runtime = True
-            runtime_login = False
-
-
-        pygame.display.flip()
-        clock.tick(fps)
-
-    #region -> Dokument erstellen / Laden
-    try:
-        file = open(save_dir,'r')
-        save = file.read()
-        save_list = save.split(",")
-
-    except:
-
-        file = open(save_dir,'a+')
-        file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
-        file = open(save_dir,'r')
-        save = file.read()
-        save_list = save.split(",")
-
-    background_r = int(save_list[0])
-    background_g = int(save_list[1])
-    background_b = int(save_list[2])
-
-    buttoncolor_r = int(save_list[3])
-    buttoncolor_g = int(save_list[4])
-    buttoncolor_b = int(save_list[5])
-    #155, 150, 100
-
-    topbar_r = int(save_list[6])
-    topbar_g = int(save_list[7])
-    topbar_b = int(save_list[8])
-
-    text_r = int(save_list[9])
-    text_g = int(save_list[10])
-    text_b = int(save_list[11])
-
-    text = ""
-    input_box = pygame.Rect(400, 100, 140, 32)
-    #endregion
-
     while runtime:
         screen.fill((int(background_r), int(background_g), int(background_b)))
 
@@ -1353,7 +1261,6 @@ while runtime_programm:
 
 
         topbar()
-        file.close()
 
 
 
