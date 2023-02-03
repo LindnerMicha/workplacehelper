@@ -22,3 +22,4 @@ if mlfb_digital[i][0] == option:
     draw_text(mlfb_digital[i][10], sys_font30, (0, 0, 0), screen, 760+33, 300+35)
     pygame.draw.rect(screen, (192, 192, 192), (860,300,85, 85))
     draw_text(mlfb_digital[i][11], sys_font30, (0, 0, 0), screen, 860+33, 300+35)
+
