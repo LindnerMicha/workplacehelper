@@ -113,6 +113,7 @@ mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", " ", " ", 0
                 ["135-6HB00-0CA1", "69482", "A5E32562703", "37", "4", "4", "37", 1, "37", "37", "37", "37"],
                 ["135-6HB00-0DA1", "69481", "A5E35652111", "37", "4", "4", "37", 1, "37", "37", "37", "37"],
                 ["135-6HD00-0BA1", "69249", "A5E31290169", "37", "4", "4", "37", 0, "37", "37", "37", "37"],
+                [" ", " ", " ", " ", " ", " ", " ", 0, " ", " ", " ", " "],
                 ["137-6AA00-0BA1", "77343", "A5E43097490", " ", " ", " ", " ", 0, "40", "40", "40", "40"]]
 
 
@@ -584,7 +585,6 @@ def baugruppen():
                 pygame.draw.rect(screen, (192, 192, 192), (860,300,85, 85))
                 draw_text(mlfb_analog[k][11], sys_font30, (0, 0, 0), screen, 860+33, 300+35)
 
-
 def material():
     pygame.draw.rect(screen, (168, 165, 165), (0,0,300, h))
     button(materials[0][0], 0, 60, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
@@ -764,32 +764,19 @@ def material():
         draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
         draw_text(materials[13][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
 def marker():
-    if option == mlfb_analog[0][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,485,15,15])
-    if option == mlfb_analog[1][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,510,15,15])
-    if option == mlfb_analog[2][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,545,15,15])
-    if option == mlfb_analog[3][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,575,15,15])
-    if option == mlfb_analog[4][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,605,15,15])
-    if option == mlfb_analog[5][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,635,15,15])
-    if option == mlfb_analog[6][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,665,15,15])
-    if option == mlfb_analog[7][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,695,15,15])
-    if option == mlfb_analog[8][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,725,15,15])
-    if option == mlfb_analog[9][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,785,15,15])
-    if option == mlfb_analog[10][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,815,15,15])
-    if option == mlfb_analog[11][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,845,15,15])
-    if option == mlfb_analog[12][0]:
-        pygame.draw.ellipse(screen, (255,0,0), [300,875,15,15])
+    y_marker = 60
+    if dig_an == "Digital":
+        for i in range(len(mlfb_digital)):
+            if option == mlfb_digital[i][0]:
+                y_marker = y_marker + (i * 30)
+                pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 10, 30])
+
+
+    if dig_an == "Analog":
+        for i in range(len(mlfb_analog)):
+            if option == mlfb_analog[i][0]:
+                y_marker = y_marker + (i * 30)
+                pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 10, 30])
 
 #endregion
 
@@ -932,6 +919,7 @@ while runtime_programm:
 
         if sites == "Baugruppen":
             baugruppen()
+            marker()
         elif sites == "Material":
             material()
         elif sites == "Suchen":
@@ -1024,161 +1012,17 @@ while runtime_programm:
                 suche_em = True
 
             if option == "Im System suchen":
+                for i in range(len(mlfb_digital)):
+                    if a5e_erg == mlfb_digital[i][2]:
+                        option = mlfb_digital[i][0]
+                        dig_an = "Digital"
+                        sites = "Baugruppen"
+                for k in range(len(mlfb_analog)):
+                    if a5e_erg == mlfb_analog[k][2]:
+                        option = mlfb_analog[k][0]
+                        dig_an = "Analog"
+                        sites = "Baugruppen"
 
-                if a5e_erg == mlfb_digital[0][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[0][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[1][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[1][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[2][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[2][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[3][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[3][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[4][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[4][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[5][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[5][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[6][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[6][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[7][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[7][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[8][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[8][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[9][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[9][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[10][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[10][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_digital[11][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_digital[11][0]
-                else:
-                    set_error = True
-
-
-
-
-                if a5e_erg == mlfb_analog[0][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[0][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[1][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[1][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[2][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[2][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[3][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[3][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[4][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[4][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[5][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[5][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[6][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[6][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[7][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[7][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[8][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[8][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[9][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[9][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[10][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[10][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[11][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[11][0]
-                else:
-                    set_error = True
-                if a5e_erg == mlfb_analog[12][2]:
-                    erg_gefunden = True
-                    sites = "Baugruppen"
-                    option = mlfb_analog[12][0]
-                else:
-                    set_error = True
         elif sites == "Settings":
             screen.fill((background_r, background_g, background_b))
             button("Backgroundcolor", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
