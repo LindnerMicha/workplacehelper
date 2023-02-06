@@ -662,6 +662,8 @@ while runtime_programm:
                 if active:
                     if event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
+                    elif event.key == pygame.K_KP_ENTER:
+                        login_but = True
                     else:
                         text += event.unicode
 
@@ -675,50 +677,55 @@ while runtime_programm:
         draw_text("Login", sys_font60, (255, 255, 255), screen, 510, 50)
         button("Anmelden", 470, 250, 200, 40, "Green", (19, 141, 158), sys_font30)
 
+
         if login_but:
             login_kennung = text
             save_dir = f"C:\\Users\\{login_kennung}\\Documents\\python_log.txt"
-            runtime = True
-            runtime_login = False
+            #region -> Dokument erstellen / Laden
+            try:
+                file = open(save_dir,'r')
+                save = file.read()
+                save_list = save.split(",")
+                runtime = True
+                runtime_login = False
+            except:
+                try:
+                    file = open(save_dir,'a+')
+                    file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
+                    file = open(save_dir,'r')
+                    save = file.read()
+                    save_list = save.split(",")
+
+                    background_r = int(save_list[0])
+                    background_g = int(save_list[1])
+                    background_b = int(save_list[2])
+
+                    buttoncolor_r = int(save_list[3])
+                    buttoncolor_g = int(save_list[4])
+                    buttoncolor_b = int(save_list[5])
+                    #155, 150, 100
+
+                    topbar_r = int(save_list[6])
+                    topbar_g = int(save_list[7])
+                    topbar_b = int(save_list[8])
+
+                    text_r = int(save_list[9])
+                    text_g = int(save_list[10])
+                    text_b = int(save_list[11])
+
+                    text = ""
+                    input_box = pygame.Rect(400, 100, 140, 32)
+                    #endregion
+                    runtime = True
+                    runtime_login = False
+                except:
+                    draw_text("Falsche Kennung", sys_font30, (255, 255, 255), screen, 484, 340)
 
 
         pygame.display.flip()
         clock.tick(fps)
 
-    #region -> Dokument erstellen / Laden
-    try:
-        file = open(save_dir,'r')
-        save = file.read()
-        save_list = save.split(",")
 
-    except:
-
-        file = open(save_dir,'a+')
-        file.write(f"{background_r},{background_g},{background_b},{buttoncolor_r},{buttoncolor_g},{buttoncolor_b},{topbar_r},{topbar_g},{topbar_b},{text_r},{text_g},{text_b}")
-        file = open(save_dir,'r')
-        save = file.read()
-        save_list = save.split(",")
-
-    background_r = int(save_list[0])
-    background_g = int(save_list[1])
-    background_b = int(save_list[2])
-
-    buttoncolor_r = int(save_list[3])
-    buttoncolor_g = int(save_list[4])
-    buttoncolor_b = int(save_list[5])
-    #155, 150, 100
-
-    topbar_r = int(save_list[6])
-    topbar_g = int(save_list[7])
-    topbar_b = int(save_list[8])
-
-    text_r = int(save_list[9])
-    text_g = int(save_list[10])
-    text_b = int(save_list[11])
-
-    text = ""
-    input_box = pygame.Rect(400, 100, 140, 32)
-    #endregion
 
     while runtime:
         screen.fill((int(background_r), int(background_g), int(background_b)))
