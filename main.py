@@ -82,6 +82,18 @@ login_but = False
 dig_an = "Digital"
 but_temp = 60
 
+#region -> Barcodes
+front_black_img = pygame.image.load("barcodes/front-schwarz.gif").convert_alpha()
+front_white_img = pygame.image.load("barcodes/front-weiß.gif").convert_alpha()
+front_hblue_img = pygame.image.load("barcodes/front-hblue.gif").convert_alpha()
+front_dblue_img = pygame.image.load("barcodes/front-dblue.gif").convert_alpha()
+cod_a_img = pygame.image.load("barcodes/cod-a.gif").convert_alpha()
+cod_b_img = pygame.image.load("barcodes/cod-b.gif").convert_alpha()
+geh_15_img = pygame.image.load("barcodes/geh-15.gif").convert_alpha()
+schach_15_img = pygame.image.load("barcodes/schach-15.gif").convert_alpha()
+schach_10_f_img = pygame.image.load("barcodes/schach-10f.gif").convert_alpha()
+e4_leer_img = pygame.image.load("barcodes/e4-leer.gif").convert_alpha()
+#endregion
 
 mlfb_digital = [["131-6BF00-0CA0", "73643", "A5E45983869", " ", " ", " ", " ", 0, " ", " ", " ", " "],
                 ["131-6BF00-0DA0", "73643", "A5E45983869", " ", " ", " ", " ", 0, " ", " ", " ", " "],
@@ -116,34 +128,21 @@ mlfb_analog =  [["134-6FB00-0BA1", "75967", "A5E35649239", " ", " ", " ", " ", 0
                 [" ", " ", " ", " ", " ", " ", " ", 0, " ", " ", " ", " "],
                 ["137-6AA00-0BA1", "77343", "A5E43097490", " ", " ", " ", " ", 0, "40", "40", "40", "40"]]
 
-
-materials = [["Frontdeckel Dunkelblau", "65325", "A5E36039007", "3196 St.", "2970 St."],
-             ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St."],
-             ["Frontdeckel Schwarz", "65189", "A5E36039004", "3196 St.", "2970 St."],
-             ["Frontdeckel Weiß", "65257", "A5E36039003", "3196 St.", "2970 St."],
-             ["Gehäuse 15mm", "63167", "A5E03387374", "925 St.", "3700 St."],
-             ["Codierung A (Schwarz)", "75504", "A5E03392060", "1500 St.", "8000 St."],
-             ["Codierung B (Weiß)", "75505", "A5E03392061", "1500 St.", "8000 St."],
-             ["Schachtel 15mm", "63448", "A5E03749927", "720 St.", "2880 St."],
-             ["Schachtel 10-fach", "64176", "A5E34858449", "360 St.", "170 St."],
+materials = [["Frontdeckel Dunkelblau", "65325", "A5E36039007", "3196 St.", "2970 St.", front_dblue_img],
+             ["Frontdeckel Hellblau", "65260", "A5E36039005", "3196 St.", "2970 St.", front_hblue_img],
+             ["Frontdeckel Schwarz", "65189", "A5E36039004", "3196 St.", "2970 St.", front_black_img],
+             ["Frontdeckel Weiß", "65257", "A5E36039003", "3196 St.", "2970 St.", front_white_img],
+             ["Gehäuse 15mm", "63167", "A5E03387374", "925 St.", "3700 St.", geh_15_img],
+             ["Codierung A (Schwarz)", "75504", "A5E03392060", "1500 St.", "8000 St.", cod_a_img],
+             ["Codierung B (Weiß)", "75505", "A5E03392061", "1500 St.", "8000 St.", cod_b_img],
+             ["Schachtel 15mm", "63448", "A5E03749927", "720 St.", "2880 St.", schach_15_img],
+             ["Schachtel 10-fach", "64176", "A5E34858449", "360 St.", "170 St.", schach_10_f_img],
              ["Etiketten 60x70", "AAB", "EWA-000000429125", "2000 St.", " "],
              ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
              ["Papiertücher (Blau)", "AAB", "EWA-000000429203", "200 St.", " "],
-             ["Thermotransferband", "AAB", "EWA-000000535789", "1 St.", " "],
              ["1.6mm Fräser", "AAB", "A5E49854071", "1 St.", " "]]
 
-#region -> Barcodes
-front_black_img = pygame.image.load("barcodes/front-schwarz.gif").convert_alpha()
-front_white_img = pygame.image.load("barcodes/front-weiß.gif").convert_alpha()
-front_hblue_img = pygame.image.load("barcodes/front-hblue.gif").convert_alpha()
-front_dblue_img = pygame.image.load("barcodes/front-dblue.gif").convert_alpha()
-cod_a_img = pygame.image.load("barcodes/cod-a.gif").convert_alpha()
-cod_b_img = pygame.image.load("barcodes/cod-b.gif").convert_alpha()
-geh_15_img = pygame.image.load("barcodes/geh-15.gif").convert_alpha()
-schach_15_img = pygame.image.load("barcodes/schach-15.gif").convert_alpha()
-schach_10_f_img = pygame.image.load("barcodes/schach-10f.gif").convert_alpha()
-e4_leer_img = pygame.image.load("barcodes/e4-leer.gif").convert_alpha()
-#endregion
+
 
 #region      -> Fonts
 pixel_font60 = pygame.font.Font("fonts/PixeloidSans.ttf", 60)
@@ -586,197 +585,42 @@ def baugruppen():
                 draw_text(mlfb_analog[k][11], sys_font30, (0, 0, 0), screen, 860+33, 300+35)
 
 def material():
-    pygame.draw.rect(screen, (168, 165, 165), (0,0,300, h))
-    button(materials[0][0], 0, 60, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[1][0], 0, 90, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[2][0], 0, 120, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[3][0], 0, 150, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    pygame.draw.rect(screen, (168, 165, 165), (0,180,300, 30))
-    button(materials[4][0], 0, 210, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[5][0], 0, 240, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[6][0], 0, 270, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    pygame.draw.rect(screen, (168, 165, 165), (0,300,300, 30))
-    button(materials[7][0], 0, 330, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[8][0], 0, 360, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[9][0], 0, 390, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[10][0], 0, 420, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    pygame.draw.rect(screen, (168, 165, 165), (0,450,300, 30))
-    button(materials[11][0], 0, 480, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[12][0], 0, 510, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-    button(materials[13][0], 0, 540, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-
-    if option == materials[0][0]:
-        draw_text(materials[0][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[0][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[0][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[0][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[0][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(front_dblue_img, (550, 450))
-    if option == materials[1][0]:
-        draw_text(materials[1][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[1][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[1][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[1][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[1][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(front_hblue_img, (550, 450))
-    if option == materials[2][0]:
-        draw_text(materials[2][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[2][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[2][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[2][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[2][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(front_black_img, (550, 450))
-    if option == materials[3][0]:
-        draw_text(materials[3][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[3][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[3][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[3][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[3][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(front_white_img, (550, 450))
-    if option == materials[4][0]:
-        draw_text(materials[4][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[4][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[4][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[4][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[4][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(geh_15_img, (550, 450))
-    if option == materials[5][0]:
-        draw_text(materials[5][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[5][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[5][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[5][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[5][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(cod_a_img, (550, 450))
-    if option == materials[6][0]:
-        draw_text(materials[6][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[6][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[6][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[6][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[6][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(cod_b_img, (550, 450))
-    if option == materials[7][0]:
-        draw_text(materials[7][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[7][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[7][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[7][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[7][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(schach_10_f_img, (550, 450))
-    if option == materials[8][0]:
-        draw_text(materials[8][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[8][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[8][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[8][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[8][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-        draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
-        screen.blit(schach_15_img, (550, 450))
-    if option == materials[9][0]:
-        draw_text(materials[9][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[9][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[9][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[9][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[9][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-    if option == materials[10][0]:
-        draw_text(materials[10][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[10][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[10][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[10][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[10][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-    if option == materials[11][0]:
-        draw_text(materials[11][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[11][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[11][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[11][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[11][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-    if option == materials[12][0]:
-        draw_text(materials[12][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[12][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[12][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[12][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[12][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
-    if option == materials[13][0]:
-        draw_text(materials[13][0], sys_font30, (text_r,text_g,text_b), screen, 310 , 100)
-        draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 150)
-        draw_text(materials[13][1], sys_font30, (text_r,text_g,text_b), screen, 550 , 150)
-        draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 200)
-        draw_text(materials[13][2], sys_font30, (text_r,text_g,text_b), screen, 550 , 200)
-        draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 250)
-        draw_text(materials[13][3], sys_font30, (text_r,text_g,text_b), screen, 550 , 250)
-        draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 310 , 300)
-        draw_text(materials[13][4], sys_font30, (text_r,text_g,text_b), screen, 550 , 300)
+    but_temp_mat = 60
+    for i in range(len(materials)):
+        button(materials[i][0], 0, but_temp_mat, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+        but_temp_mat += 30
+        if option == materials[i][0]:
+            draw_text(materials[i][0], sys_font30, (text_r,text_g,text_b), screen, 410 , 100)
+            draw_text("AUB-Nummer: ", sys_font30, (text_r,text_g,text_b), screen, 410 , 150)
+            draw_text(materials[i][1], sys_font30, (text_r,text_g,text_b), screen, 650 , 150)
+            draw_text("Teilenummer: ", sys_font30, (text_r,text_g,text_b), screen, 410 , 200)
+            draw_text(materials[i][2], sys_font30, (text_r,text_g,text_b), screen, 650 , 200)
+            draw_text("Verpackungseinheit: ", sys_font30, (text_r,text_g,text_b), screen, 410 , 250)
+            draw_text(materials[i][3], sys_font30, (text_r,text_g,text_b), screen, 650 , 250)
+            draw_text("Tiefbestand: ", sys_font30, (text_r,text_g,text_b), screen, 410 , 300)
+            draw_text(materials[i][4], sys_font30, (text_r,text_g,text_b), screen, 650 , 300)
+            if materials[i][1] != "AAB":
+                draw_text("Bestellcode für Scanner", sys_font30, (text_r,text_g,text_b), screen, 600 , 400)
+                screen.blit(materials[i][5], (550, 450))
 def marker():
-    y_marker = 60
-    if dig_an == "Digital":
-        for i in range(len(mlfb_digital)):
-            if option == mlfb_digital[i][0]:
-                y_marker = y_marker + (i * 30)
-                pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 10, 30])
-
-
-    if dig_an == "Analog":
-        for i in range(len(mlfb_analog)):
-            if option == mlfb_analog[i][0]:
-                y_marker = y_marker + (i * 30)
-                pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 10, 30])
+    if sites == "Baugruppen":
+        y_marker = 60
+        if dig_an == "Digital":
+            for i in range(len(mlfb_digital)):
+                if option == mlfb_digital[i][0]:
+                    y_marker = y_marker + (i * 30)
+                    pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 15, 30])
+        if dig_an == "Analog":
+            for i in range(len(mlfb_analog)):
+                if option == mlfb_analog[i][0]:
+                    y_marker = y_marker + (i * 30)
+                    pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 15, 30])
+    elif sites == "Material":
+        y_marker = 60
+        for m_m in range(len(materials)):
+            if option == materials[m_m][0]:
+                y_marker = y_marker + (m_m * 30)
+                pygame.draw.rect(screen, (255, 0, 0), [300, y_marker, 15, 30])
 
 #endregion
 
@@ -919,8 +763,10 @@ while runtime_programm:
 
         if sites == "Baugruppen":
             baugruppen()
+            marker()
         elif sites == "Material":
             material()
+            marker()
         elif sites == "Suchen":
 
             button("Suche", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
@@ -1197,9 +1043,6 @@ while runtime_programm:
 
         topbar()
         file.close()
-
-
-
 
 
 
