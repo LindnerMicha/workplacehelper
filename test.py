@@ -733,10 +733,8 @@ while runtime_programm:
         maus_pos = pygame.mouse.get_pos()
         maus_klick = pygame.mouse.get_pressed()
         pressed = pygame.key.get_pressed()
-
         if sites == "Exit":
             runtime_programm = False
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 runtime_programm = False
@@ -761,13 +759,10 @@ while runtime_programm:
                 input_box.w = width
                 screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
                 pygame.draw.rect(screen, color, input_box, 2)
-
-
         if pressed[pygame.K_SPACE]:
             runtime_programm = False
         if sites == "Exit":
             runtime = False
-
         if sites == "Baugruppen":
             baugruppen()
             marker()
@@ -775,7 +770,6 @@ while runtime_programm:
             material()
             marker()
         elif sites == "Suchen":
-
             button("Suche", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
             button("Neue Suche", 0, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
             button("Im System suchen", 400, 200, 235, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
@@ -787,15 +781,10 @@ while runtime_programm:
                 pygame.draw.ellipse(screen, (255,0,0), [880,140,15,15])
             draw_text("Die A5E Nummer lautet: ", sys_font30, (text_r,text_g,text_b), screen, 400 , 165)
             draw_text(a5e_erg, sys_font30, (text_r,text_g,text_b), screen, 700 , 165)
-
-
             if set_error == True:
                 a5e_erg = "Error Webscraper / Ungültiger Barcode"
                 #draw_text("Error Webscraper / Ungültiger Barcode", sys_font30, (text_r,text_g,text_b), screen, 700 , 165)
-
-
             #region -> Webscraper
-
             # Render the current text.
             txt_surface = font.render(text, True, color)
             # Resize the box if the text is too long.
@@ -815,46 +804,26 @@ while runtime_programm:
                 suche_string = ""
 
             if option == "Suche" and suche_em:
-
                 try:
                     suche_string = text
-
-
                     url_requested = request.urlopen(f'https://simaticit.amb2.siemens.de/snr/Default.aspx?SN={suche_string}')
                     if 200 == url_requested.code:
                         html_content = str(url_requested.read())
-
-
                     if scan_switch == "Leiterplatte":
                         material_index = html_content.index("Materialnummer der gescannten Seriennummer")
-
                         html_index_min = material_index
                         html_index_max = material_index + 250
-
                         html_index = html_content.index('A5E', html_index_min, html_index_max)
-
                         a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
-
-
                     elif scan_switch == "Baugruppe":
                         material_index = html_content.index("HeaderTableBlueWhiteHyperlink")
-
                         html_index_min = material_index
                         html_index_max = material_index + 250
-
                         html_index = html_content.index('A5E', html_index_min, html_index_max)
-
                         a5e_erg = html_content[html_index]+html_content[html_index+1]+html_content[html_index+2]+html_content[html_index+3]+html_content[html_index+4]+html_content[html_index+5]+html_content[html_index+6]+html_content[html_index+7]+html_content[html_index+8]+html_content[html_index+9]+html_content[html_index+10]
-
-
-
                     set_error = False
-
-
                 except:
                     set_error = True
-
-
             #endregion
 
 
@@ -862,7 +831,6 @@ while runtime_programm:
                 suche_em = False
             else:
                 suche_em = True
-
             if option == "Im System suchen":
                 for i in range(len(mlfb_digital)):
                     if a5e_erg == mlfb_digital[i][2]:
@@ -874,7 +842,6 @@ while runtime_programm:
                         option = mlfb_analog[k][0]
                         dig_an = "Analog"
                         sites = "Baugruppen"
-
         elif sites == "Settings":
             screen.fill((background_r, background_g, background_b))
             button("Backgroundcolor", 0, 100, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
@@ -1046,14 +1013,8 @@ while runtime_programm:
                 draw_text("Copyrighted by Michael Lindner", sys_font30, (text_r,text_g,text_b), screen, 585 , 840)
                 draw_text("Siemens AG Amberg", sys_font30, (text_r,text_g,text_b), screen, 650 , 870)
 
-
-
         topbar()
         file.close()
-
-
-
-
 
         if sites == "Exit":
             runtime_programm = False
