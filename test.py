@@ -2,9 +2,10 @@ import os.path
 
 import pygame
 import sys
-import time
 from urllib import request
 import tkinter as tk
+import string
+import secrets
 
 application_path = os.path.dirname(sys.executable)
 
@@ -36,7 +37,43 @@ scan_switch = "Leiterplatte"
 #save_dir = "C:\\Users\\micha\\Desktop\\python_log.txt"
 save_dir = "C:\\Users\\z003sujp\\Documents\\python_log.txt"
 
+#region  -> PW_generator
 
+letters = string.ascii_letters
+digits = string.digits
+special_chars = string.punctuation
+alphabet = letters + digits + special_chars
+
+root = tk.Tk()
+root.title("Paswort Generator")
+
+entry_label1 = tk.Label(root, text = "Paswort länge")
+entry_label1.grid(row = 0, column = 0)
+entry_label2 = tk.Label(root, text = "Verwendungszweck")
+entry_label2.grid(row = 1, column = 0)
+
+global pw_gen
+pw_gen = False
+def gen_pw():
+    global pwd
+    text_box.delete('1.0', tk.END)
+    pwd = ""
+    inp_len = int(user_entry1.get())
+    for i in range(inp_len):
+        pwd += ''.join(secrets.choice(alphabet))
+    text_box.insert("end-1c", f"Dein Paswort lautet: {pwd}")
+
+def log_pw():
+    inp_vw = user_entry2.get()
+    save_dir_pw = f"C:\\Users\\{login_kennung}\\Documents\\pw_save.txt"
+    file_pw = open(save_dir_pw,'a+')
+    file_pw.write(f"Verwendungszweck = {inp_vw} , Passwort = {pwd} \n")
+
+def close_pw_gen():
+    global pw_gen
+    root.quit()
+    pw_gen = False
+#endregion
 
 
 font = pygame.font.Font(None, 32)
@@ -173,6 +210,7 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
     global text
     global input_box
     global dig_an
+    global pw_gen
 
     if maus_pos[0] > but_x and maus_pos[0] < but_x + but_laenge and maus_pos[1] > but_y and maus_pos[1] < but_y+but_hoehe:
         pygame.draw.rect(screen, but_color_1, (but_x, but_y, but_laenge, but_hoehe))
@@ -192,6 +230,8 @@ def button(but_txt, but_x, but_y, but_laenge, but_hoehe, but_color_0, but_color_
                 sites = "Suchen"
             elif but_txt == "Settings":
                 sites = "Settings"
+            elif but_txt == "Paswort Generator":
+                pw_gen = True
             elif but_txt == "Leiterplatte":
                 scan_switch = "Leiterplatte"
             elif but_txt == "Baugruppe":
@@ -848,7 +888,8 @@ while runtime_programm:
             button("Buttoncolor", 0, 130, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
             button("Topbarcolor", 0, 160, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
             button("Textcolor", 0, 190, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
-            button("Support", 0, 269, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+            button("Paswort Generator", 0, 269, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
+            button("Support", 0, 369, 300, 30, (buttoncolor_r,buttoncolor_g,buttoncolor_b), (0,100,255), sys_font22)
 
             if option == "Backgroundcolor":
                 button_setting("+", 400, 100, 30, 30, (155, 150, 100), (0,100,255), sys_font22)
@@ -1012,6 +1053,27 @@ while runtime_programm:
                 draw_text("michael.lindner@siemens.com", sys_font30, (text_r,text_g,text_b), screen, 585 , 300)
                 draw_text("Copyrighted by Michael Lindner", sys_font30, (text_r,text_g,text_b), screen, 585 , 840)
                 draw_text("Siemens AG Amberg", sys_font30, (text_r,text_g,text_b), screen, 650 , 870)
+
+
+        try:
+            while pw_gen:
+                button1=tk.Button(root, text="Erzeugen", command=gen_pw)
+                button1.grid(row=0,column=2)
+                button2=tk.Button(root, text="Merken", command=log_pw)
+                button2.grid(row=1,column=2)
+                button3=tk.Button(root, text="Close", command=close_pw_gen)
+                button3.grid(row=2,column=2)
+
+                user_entry1 = tk.Entry(root)
+                user_entry1.grid(row = 0, column = 1)
+                user_entry2 = tk.Entry(root)
+                user_entry2.grid(row = 1, column = 1)
+
+                text_box = tk.Text(root, width = 65, height = 2)
+                text_box.grid(row = 2, column = 0, columnspan = 2)
+                root.mainloop()
+        except:
+            pass
 
         topbar()
         file.close()
